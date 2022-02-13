@@ -109,8 +109,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-.clonador
-clonador/
+.gitcloner
+gitcloner/
 
 # Spyder project settings
 .spyderproject
