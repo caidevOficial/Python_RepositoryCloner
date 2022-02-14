@@ -2,10 +2,13 @@
 It allows you to clone repositories from github in bulk and store them in specific directories from a csv file.
 
 ### File format
-* 1st Column: Sub directory
-* 2nd Column: Folder Name
-* 3rd & 4th Column: It aren't used (yet)
-* 5th Column: Repository Name to download (It could skip the '.git' part)
+* 1st Column: Date time. [it isn't used yet.]
+* 2nd Column: Student Name
+* 3rd Column: Student Surname
+* 4th Column: Student Division
+* 5th Column: Student ID. [it isn't used yet.]
+* 6th Column: Student E-mail. [it isn't used yet.]
+* 7th Column: Repository Name to download (It could skip the '.git' part)
 
 
 # Configuration
