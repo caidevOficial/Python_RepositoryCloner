@@ -17,9 +17,10 @@
 
 import os
 import requests
+from PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
+
 #import pandas as pd
 #from pandas import DataFrame as df
-from PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
 
 
 class DataManager:
@@ -148,15 +149,15 @@ class DataManager:
 
         try:
             with open(self.GetFilename(), 'r') as f:
-                lines:list = f.readlines()
+                lines:list = f.readlines()[1::]
                 for line in lines:
-                    fieldList = line.split(';')
-                    fieldList = [x.strip() for x in fieldList]
+                    fieldList = line.split(',')
+                    fieldList = [x.strip().replace('"', '') for x in fieldList]
 
-                    if len(fieldList)>=4:
-                        message = f'Cloning repository of {fieldList[0]}'
+                    if len(fieldList)>=6:
+                        message = f'Cloning repository of {fieldList[2]}, {fieldList[1]}'
                         self.__Messenger = CM(message)
-                        studentGitUrl = fieldList[4]
+                        studentGitUrl = fieldList[6]
                         api = self.GetAPIURL()
                         date = self.GetDate(api)
 
@@ -188,6 +189,16 @@ class DataManager:
             url = f'{url}.git'
         return url.replace("\\n","")
 
+    def NormalizeCourse(self, course:str)->str:
+        """[summary]
+        Normalize the course name, removing the spaces.
+        Args:
+            course (str): [The course name]
+        Returns:
+            str: [The normalized course name]
+        """
+        return course.replace(' - ', '-').replace(" ","_")
+
     def FormatSurname(self, fieldList:list, date)->str:
         """[summary]
         Format the surname of the student, removing the spaces and replacing them with _
@@ -197,8 +208,10 @@ class DataManager:
             Returns:
                 str: [The formatted surname]
         """
-        surname = fieldList[0].replace(",","_").replace(" ","").replace("\n","")
-        return f'{surname}_{date}'
+        surname = fieldList[2].replace(",","_").replace(" ","").replace("\n","")
+        name = fieldList[1].replace(",","_").replace(" ","").replace("\n","")
+        
+        return f'{surname}_{name}_{date}'
     
     def FormatCourse(self, fieldList:str)->str:
         """[summary]
@@ -208,7 +221,7 @@ class DataManager:
         Returns:
             str: [The formatted course]
         """
-        return fieldList[1].replace("\n","")
+        return self.NormalizeCourse(fieldList[3].replace("\n",""))
         
     def MakeCloneCommands(self, surname:str, course:str, git:str)->None:
         """[summary]
