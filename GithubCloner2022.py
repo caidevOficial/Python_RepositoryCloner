@@ -19,11 +19,12 @@ import json
 from GetData_Mod.DataManager import DataManager as DM
 
 ########## Start Basic Configuration ##########
-filename = 'students_spd.csv'
+filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V1.1.04]'
+version = '[V1.1.05]'
 fileConfigName = 'apiInfo.json'
 ########## End Basic Configuration ##########
+
 try:
     with open(fileConfigName, 'r') as APIFILE:
         JsonFile = json.load(APIFILE)[0]
