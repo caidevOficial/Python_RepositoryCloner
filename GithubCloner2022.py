@@ -18,21 +18,62 @@
 import json
 from GetData_Mod.DataManager import DataManager as DM
 
-########## Start Basic Configuration ##########
+import pandas as pd
+from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
+
+##########? Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V1.1.05]'
-fileConfigName = 'apiInfo.json'
-########## End Basic Configuration ##########
+version = '[V1.1.04]'
+fileConfigName = 'API_Info.json'
+##########? End Basic Configuration ##########
+
+
 
 try:
-    with open(fileConfigName, 'r') as APIFILE:
-        JsonFile = json.load(APIFILE)[0]
-        print(JsonFile)
-        APIURL = f'{JsonFile["URL"]}/{JsonFile["USER"]}/{JsonFile["REPO"]}/commits/{JsonFile["BRANCH"]}'
-        print(APIURL)
+    JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
+    JsonAPI = JsonFile['Github']
+    JsonDFConfigs = JsonFile['DataFrame']['Fields']
+    
+    Handler = DfH()
+    Manager = DM()
+    Manager.InitialConfig(name, version, JsonAPI)
 
-    manager = DM(filename, name, version, APIURL)
-    manager.OpenFile()
-except FileNotFoundError:
-    print(f'File not found: {fileConfigName}')
+
+    ########## Start DataFrame Configuration ##########
+    #* Reads the 'csv' File to get the dataframe
+    df = pd.read_csv(filename)
+
+    #? SETTINGS OF DATAFRAMEHANDLER
+    #* Sets the Main DF to the class to handle it
+    Handler.MainDataFrame = df
+    Handler.ConfigsJsonValues = JsonDFConfigs
+    Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
+
+    ########## TEST UNIQUE VALUES ########## #* TEST PASSED
+    print('UNIQUE VALUES\n')
+    for unique in Handler.UniqueColumns:
+        print(unique)
+    ########## End TEST UNIQUE VALUES ##########
+
+    ########## TEST LIST OF STUDENTS ########## #* TEST PASSED
+    print('\nLIST OF STUDENTS\n')
+    studList = Handler.OrderListOfDFStudents
+    print(studList)
+    ########## END TEST LIST OF STUDENTS ##########
+
+except Exception as e:
+    #print(f'File not found: {fileConfigName}')
+    print(f'Error: {e}')
+
+# try:
+#     with open(fileConfigName, 'r') as APIFILE:
+#         JsonFile = pd.read_json(APIFILE)["Github"]
+#         print(JsonFile)
+#         APIURL = f'{JsonFile["URL"]}/{JsonFile["USER"]}/{JsonFile["REPO"]}/commits/{JsonFile["BRANCH"]}'
+#         print(APIURL)
+
+#     manager = DM(filename, name, version, APIURL)
+#     manager.OpenFile()
+# except FileNotFoundError:
+#     print(f'File not found: {fileConfigName}')

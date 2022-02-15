@@ -18,9 +18,10 @@
 import os
 import requests
 from PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
+from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DFH
 
-#import pandas as pd
-#from pandas import DataFrame as df
+import pandas as pd
+from pandas import DataFrame
 
 
 class DataManager:
@@ -36,13 +37,18 @@ class DataManager:
     __version = ''
     __commands: list = []
     __Messenger: CM = None
-    #__studentsInfo: pd.DataFrame = pd.DataFrame()
+    __studentsInfo: DataFrame = DataFrame()
 
-    def __init__(self, fileName:str, name:str, version:str, APIURL:str):
-        self.SetFilename(fileName)
+    def __init__(self):
+        pass
+
+    def InitialConfig(self, name:str, version:str, APIURL:dict):
+        #self.SetFilename(fileName)
         self.SetAppName(name)
         self.SetAppVersion(version)
         self.SetAPIURL(APIURL)
+
+    #* SETTERS
 
     def SetFilename(self, fileName:str)->None:
         """[summary]
@@ -68,13 +74,17 @@ class DataManager:
         """
         self.__version = version
 
-    def SetAPIURL(self, api:str)->None:
+    def SetAPIURL(self, api:dict)->None:
         """[summary]
         Set the URL of the API
         Args:
             api (str): [The URL of the API]
+            "URL": "https://api.github.com/repos",
+            "USER": "CaidevOficial",
+            "REPO": "Python_Udemy_DataManipulation",
+            "BRANCH": "main"
         """
-        self.__configAPIURL = api
+        self.__configAPIURL = f'{api["URL"]}/{api["USER"]}/{api["REPO"]}/{api["BRANCH"]}'
 
     def AddComand(self, command:str)->None:
         """[summary]
@@ -84,6 +94,16 @@ class DataManager:
         """
         self.__commands.append(command)
 
+    def SetStudentsDF(self, students: DataFrame)->None:
+        """[summary]
+        Sets the dataframe of students to work with.
+        Args:
+            students (DataFrame): The dataframe of students to work
+        """
+        self.__studentsInfo = students
+
+    #* GETTERS
+
     def GetCommands(self)->list:
         """[summary]
         Get the commands to clone the repositories of the students
@@ -91,6 +111,24 @@ class DataManager:
             list: [The list of the commands to execute]
         """
         return self.__commands
+    
+    @property
+    def Commands(self):
+        """[summary]
+        Get the commands to clone the repositories of the students
+        Returns:
+            list: [The list of the commands to execute]
+        """
+        return self.__commands
+    
+    @Commands.setter
+    def Commands(self, commands:list):
+        """[summary]
+        Set the commands to clone the repositories of the students
+        Args:
+            commands (list): [The list of the commands to execute]
+        """
+        self.__commands = commands
 
     def GetAppName(self)->str:
         """[summary]
@@ -137,6 +175,102 @@ class DataManager:
         date = date[:10]
         return date.replace("-","")
 
+    def GetStudentsDF(self)->DataFrame:
+        """[summary]
+        Gets the Students DataFrame of the class to work with.
+        Returns:
+            DataFrame: The Actual DataFrame of the students
+        """
+        return self.__studentsInfo
+
+    def NormalizeURL(self, url:str)->str:
+        """[summary]
+        Normalize the URLs of the git's repositorys of the students, 
+        adding the .git at the end if it is not already there
+        Args:
+            url (str): [The crudal url of the git's repository]
+        Returns:
+            str: [The normalized url]
+        """
+        if not ".git" in url:
+            url = url.replace('\n','')
+            url = f'{url}.git'
+        return url.replace("\\n","")
+
+    def NormalizeCourse(self, course:str)->str:
+        """[summary]
+        Normalize the course name, removing the spaces.
+        Args:
+            course (str): [The course name]
+        Returns:
+            str: [The normalized course name]
+        """
+        return course.replace(' - ', '-').replace(" ","_")
+
+    def FormatFullnameDate(self, surname:str, name:str)->str:
+        """[summary]
+        Format the surname of the student, removing the spaces and replacing them with _
+        Args:
+            surname (str): [The surname of the student]
+            name (str): [The name of the student]
+            date (str): [The date of the student]
+            Returns:
+                str: [The formatted Fullname like this: surname_name_date]
+        """
+        surname = surname.replace(",","_").replace(" ","").replace("\n","")
+        name = name.replace(",","_").replace(" ","").replace("\n","")
+        
+        return f'{surname}_{name}_{self.GetDate(self.GetAPIURL())}'
+    
+    def FormatCourse(self, fieldList:str)->str:
+        """[summary]
+        Format the course of the student, removing the line jumps and replacing them with _
+        Args:
+            fieldList (str): [The field of the course. It is the second field of the csv file]
+        Returns:
+            str: [The formatted course]
+        """
+        return self.NormalizeCourse(fieldList[3].replace("\n",""))
+        
+    # def MakeCloneCommands(self, surname:str, course:str, git:str)->None:
+    #     """[summary]
+    #     Make the commands to clone the repositories of the students
+    #     Args:
+    #         surname (str): [The surname of the student]
+    #         course (str): [The course of the student]
+    #         git (str): [The url of the git's repository]    
+    #     """
+    #     command = f'git clone {git} {course}//{surname}'
+    #     self.AddComand(command)
+    
+    #def MakeCloneCommands(self, dfHandler:DataFrame, surname:str, name:str, course:str, git:str)->None:
+    def MakeCloneCommands(self, dfHandler: DFH, df: DataFrame, configJsonFields: dict)->None:
+            """[summary]
+            Make the commands to clone the repositories of the students
+            Args:
+                surname (str): [The surname of the student]
+                course (str): [The course of the student]
+                git (str): [The url of the git's repository]    
+            """
+            for index, row in dfHandler.iterrows():
+                courseStr = self.NormalizeCourse(self.FormatCourse(row[configJsonFields['Course']]))
+                surnameStr = row[configJsonFields['Surname']]
+                nameStr = row[configJsonFields['Name']]
+                command = f"git clone {self.NormalizeURL(row[configJsonFields['GitLink']])} {courseStr}//{self.FormatFullnameDate(surnameStr, nameStr)}"
+                self.AddComand(command)
+            
+            
+
+    def ExecuteCommands(self)->None:
+        """[summary]
+        Execute the commands to clone the repositories of the students
+        Args:
+            commandList (list): [The list of the commands to execute]
+        """
+        commandList = [x.strip() for x in self.Commands]
+        for command in commandList:
+            os.system(command)
+
     #!TODO: Implement Pandas
     def OpenFile(self)->None:
         """[summary]
@@ -175,71 +309,6 @@ class DataManager:
             self.__Messenger = CM(e)
             self.__Messenger.PrintMessage()
     
-    def NormalizeURL(self, url:str)->str:
-        """[summary]
-        Normalize the URLs of the git's repositorys of the students, 
-        adding the .git at the end if it is not already there
-        Args:
-            url (str): [The crudal url of the git's repository]
-        Returns:
-            str: [The normalized url]
-        """
-        if not ".git" in url:
-            url = url.replace('\n','')
-            url = f'{url}.git'
-        return url.replace("\\n","")
+    #def DoMagic(self, dfHandler: DFH):
 
-    def NormalizeCourse(self, course:str)->str:
-        """[summary]
-        Normalize the course name, removing the spaces.
-        Args:
-            course (str): [The course name]
-        Returns:
-            str: [The normalized course name]
-        """
-        return course.replace(' - ', '-').replace(" ","_")
 
-    def FormatSurname(self, fieldList:list, date)->str:
-        """[summary]
-        Format the surname of the student, removing the spaces and replacing them with _
-        Args:
-            fieldList (list): [The list of the fields of the student]
-            date (str): [The date of the student]
-            Returns:
-                str: [The formatted surname]
-        """
-        surname = fieldList[2].replace(",","_").replace(" ","").replace("\n","")
-        name = fieldList[1].replace(",","_").replace(" ","").replace("\n","")
-        
-        return f'{surname}_{name}_{date}'
-    
-    def FormatCourse(self, fieldList:str)->str:
-        """[summary]
-        Format the course of the student, removing the line jumps and replacing them with _
-        Args:
-            fieldList (str): [The field of the course. It is the second field of the csv file]
-        Returns:
-            str: [The formatted course]
-        """
-        return self.NormalizeCourse(fieldList[3].replace("\n",""))
-        
-    def MakeCloneCommands(self, surname:str, course:str, git:str)->None:
-        """[summary]
-        Make the commands to clone the repositories of the students
-        Args:
-            surname (str): [The surname of the student]
-            course (str): [The course of the student]
-            git (str): [The url of the git's repository]    
-        """
-        command = f'git clone {git} {course}//{surname}'
-        self.AddComand(command)
-
-    def ExecuteCommands(self, commandList:list)->None:
-        """[summary]
-        Execute the commands to clone the repositories of the students
-        Args:
-            commandList (list): [The list of the commands to execute]
-        """
-        commandList = [x.strip() for x in commandList]
-        for command in commandList:
-            os.system(command)
