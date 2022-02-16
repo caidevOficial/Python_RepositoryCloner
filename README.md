@@ -15,6 +15,18 @@
     <h3>Programming Student & Assistant Professor at the <strong>National Technological University [UTN]</strong> 👨‍💻</h3>
     <h3>Backend programmer at <strong>Accenture</strong> 👨‍💻</h3>
 </div>
+
+![](https://hit.yhype.me/github/profile?user_id=12877139)
+
+<p align="center">
+    <img src="https://komarev.com/ghpvc/?username=caidevoficial&label=Profile%20views&color=0e75b6&style=plastic" alt="caidevoficial" />
+</p>
+
+<p align="center">
+    <a href="https://github.com/CaidevOficial">
+        <img src="https://github-profile-trophy.vercel.app/?username=caidevoficial&theme=nord&column=7" alt="caidevoficial" />
+    </a>
+</p>
 <br><br><br>
 
 ---
