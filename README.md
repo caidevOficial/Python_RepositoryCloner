@@ -9,8 +9,17 @@
   </tr>
   </table>
   </br>
+<div align="center">
+    <h3>Pisces♓ | Developer👨‍💻 | Python<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="28"/> | GCP <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg?raw=true" alt="GCP" width="30" height="30"> | Java <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="30" height="30"/> | C# <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="25" height="25"/> | Dreamer 💖 | Teacher👨‍🏫| A bit nerd🤓</h3>
+    <br>
+    <h3>Programming Student & Assistant Professor at the <strong>National Technological University [UTN]</strong> 👨‍💻</h3>
+    <h3>Backend programmer at <strong>Accenture</strong> 👨‍💻</h3>
+</div>
+<br><br><br>
 
+---
 
+<br><br><br>
 # Repository Cloner
 The program it allows you to clone repositories from github in bulk and store them in specific directories from a csv file.
 Aditionally it saves the data of every student & course into a json with the name of the course.
