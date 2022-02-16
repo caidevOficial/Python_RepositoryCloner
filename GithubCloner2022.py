@@ -15,24 +15,48 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import json
 from GetData_Mod.DataManager import DataManager as DM
 
-########## Start Basic Configuration ##########
+import pandas as pd
+from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
+
+##########? Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V1.1.05]'
-fileConfigName = 'apiInfo.json'
-########## End Basic Configuration ##########
+version = '[V2.0.1]'
+author = '[FacuFalcone - CaidevOficial]'
+fileConfigName = 'API_Info.json'
+##########? End Basic Configuration ##########
 
 try:
-    with open(fileConfigName, 'r') as APIFILE:
-        JsonFile = json.load(APIFILE)[0]
-        print(JsonFile)
-        APIURL = f'{JsonFile["URL"]}/{JsonFile["USER"]}/{JsonFile["REPO"]}/commits/{JsonFile["BRANCH"]}'
-        print(APIURL)
+    ##########? Start Initialization ##########
+    JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
+    JsonAPI = JsonFile['Github']
+    JsonDFConfigs = JsonFile['DataFrame']['Fields']
+    ##########? End Initialization ############
 
-    manager = DM(filename, name, version, APIURL)
-    manager.OpenFile()
-except FileNotFoundError:
-    print(f'File not found: {fileConfigName}')
+    ##########? Start Objects Instances ##########
+    Handler = DfH()
+    Manager = DM()
+    ##########? End Objects Instances ##########
+
+    ##########? Start DataManager Configuration ##########
+    Manager.InitialConfig(name, version, author, JsonAPI)
+    ##########? End DataManager Configuration ##########
+
+    ##########? Start DataFrame Configuration ##########
+    #* Reads the 'csv' File to get the dataframe
+    df = pd.read_csv(filename)
+
+    #* Sets the Main DF to the class to handle it
+    Handler.MainDataFrame = df
+    Handler.ConfigsJsonValues = JsonDFConfigs
+    Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
+    ##########? End DataFrame Configuration ##########
+
+    ##########? Start Initialize DataManager ########## 
+    Manager.CloneRepositories(Handler)
+    ###########? End Initialize DataManager ###########
+
+except Exception as e:
+    print(f'Exception: {e.args}')

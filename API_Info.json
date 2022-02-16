@@ -1,0 +1,18 @@
+{
+    "Github": {
+        "URL": "https://api.github.com/repos",
+        "USER": "CaidevOficial",
+        "REPO": "Python_Udemy_DataManipulation",
+        "BRANCH": "main"
+    },
+    "DataFrame": {
+        "Fields": {
+            "Name": "Nombre/s",
+            "Surname": "Apellido/s",
+            "Course": "División",
+            "ID": "DNI / Legajo",
+            "Email": "E-Mail",
+            "GitLink": "Link al repositorio"
+        }
+    }
+}
