@@ -15,39 +15,49 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
-
 class CloneMessenger:
-    """_summary_
-    Class to print messages in the console
+    """[summary]
+    Class to print messages in the console.\n
     Returns:
-        class: CloneMessenger
+        class: [CloneMessenger].\n
     """
+    #######? START ATTRIBUTES #######
     __message:str = ''
+    #######? END ATTRIBUTES #######
 
-    def __init__(self, message:str) -> None:
-        self.SetMessage(message)
+    def __init__(self) -> None:
+        pass
     
     def SetMessage(self, message:str) -> None:
-        """[_summary]
-        Sets the message of the class
+        """[summary]\n
+        Sets the message of the class.\n
         Args:
-            message (str): The message to be printed in the console
+            message (str): The message to be printed in the console.\n
         """
         self.__message = message
     
     def GetMessage(self) -> str:
-        """_summary_
-        Gets the message of the class
+        """[summary]\n
+        Gets the message of the class.\n
         Returns:
-            str: Message of the class to be printed in the console.
+            str: Message of the class to be printed in the console.\n
         """
         return self.__message
     
+    ############? START METHODS ############
+
+    def InitializeMessenger(self, message:str) -> None:
+        """[summary]\n
+        Initializes the class with a message.\n
+        Args:
+            message (str): The message to be printed in the console.\n
+        """
+        self.SetMessage(message)
+
     def PrintMessage(self) -> None:
-        """[summary]
-        Creates a string of symbols of the same length of the message and
-        prints them in the console.
+        """[summary]\n
+        Creates a string of symbols of the same length of the message and\n
+        prints them in the console.\n
         """
         symbols = self.GenerateSymbols()
         print(
@@ -58,10 +68,11 @@ class CloneMessenger:
         )
     
     def GenerateSymbols(self) -> str:
-        """[summary]
-        Generates a string of symbols of the same length of the message of the class
+        """[summary]\n
+        Generates a string of symbols of the same length of the message of the class.\n
         Returns:
-            str: String of symbols of the same length of the message of the class
+            str: String of symbols of the same length of the message of the class.\n
         """
         return ''.join(['#' for i in range(len(self.GetMessage()))])
     
+    ############? END METHODS ############
