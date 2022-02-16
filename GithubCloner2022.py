@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import json
 from GetData_Mod.DataManager import DataManager as DM
 
 import pandas as pd
@@ -24,56 +23,39 @@ from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
 ##########? Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V1.1.04]'
+version = '[V1.2.01]'
 fileConfigName = 'API_Info.json'
 ##########? End Basic Configuration ##########
 
-
-
 try:
+    ##########? Start Initialization ##########
     JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
     JsonAPI = JsonFile['Github']
     JsonDFConfigs = JsonFile['DataFrame']['Fields']
-    
+    ##########? End Initialization ############
+
+    ##########? Start Objects Instances ##########
     Handler = DfH()
     Manager = DM()
+    ##########? End Objects Instances ##########
+
+    ##########? Start DataManager Configuration ##########
     Manager.InitialConfig(name, version, JsonAPI)
+    ##########? End DataManager Configuration ##########
 
-
-    ########## Start DataFrame Configuration ##########
+    ##########? Start DataFrame Configuration ##########
     #* Reads the 'csv' File to get the dataframe
     df = pd.read_csv(filename)
 
-    #? SETTINGS OF DATAFRAMEHANDLER
     #* Sets the Main DF to the class to handle it
     Handler.MainDataFrame = df
     Handler.ConfigsJsonValues = JsonDFConfigs
     Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
+    ##########? End DataFrame Configuration ##########
 
-    ########## TEST UNIQUE VALUES ########## #* TEST PASSED
-    print('UNIQUE VALUES\n')
-    for unique in Handler.UniqueColumns:
-        print(unique)
-    ########## End TEST UNIQUE VALUES ##########
-
-    ########## TEST LIST OF STUDENTS ########## #* TEST PASSED
-    print('\nLIST OF STUDENTS\n')
-    studList = Handler.OrderListOfDFStudents
-    print(studList)
-    ########## END TEST LIST OF STUDENTS ##########
+    ##########? Start Initialize DataManager ########## 
+    Manager.CloneRepositories(Handler)
+    ###########? End Initialize DataManager ###########
 
 except Exception as e:
-    #print(f'File not found: {fileConfigName}')
-    print(f'Error: {e}')
-
-# try:
-#     with open(fileConfigName, 'r') as APIFILE:
-#         JsonFile = pd.read_json(APIFILE)["Github"]
-#         print(JsonFile)
-#         APIURL = f'{JsonFile["URL"]}/{JsonFile["USER"]}/{JsonFile["REPO"]}/commits/{JsonFile["BRANCH"]}'
-#         print(APIURL)
-
-#     manager = DM(filename, name, version, APIURL)
-#     manager.OpenFile()
-# except FileNotFoundError:
-#     print(f'File not found: {fileConfigName}')
+    print(f'Exception: {e.args}')
