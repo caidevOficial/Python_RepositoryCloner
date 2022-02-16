@@ -194,7 +194,7 @@ Like this:
 
 <br><br><br>
 # Configuration
-In order to use this Cloner, you should configure the file [apiInfo.json](apiInfo.json) with your Github API's information as shown below.
+In order to use this Cloner, you should configure the file [API_Info.json](./Modules/API_Info.json) with your Github API's information as shown below.
 
 ```json
 [

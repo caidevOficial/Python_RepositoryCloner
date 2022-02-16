@@ -18,9 +18,9 @@
 import os
 
 import requests
-from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DFH
+from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DFH
+from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
 from pandas import DataFrame
-from PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
 
 
 class DataManager:

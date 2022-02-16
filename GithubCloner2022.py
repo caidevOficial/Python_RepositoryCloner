@@ -17,15 +17,15 @@
 
 import pandas as pd
 
-from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
-from GetData_Mod.DataManager import DataManager as DM
+from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
+from Modules.GetData_Mod.DataManager import DataManager as DM
 
 # ?######### Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V2.0.1]'
+version = '[V2.0.11]'
 author = '[FacuFalcone - CaidevOficial]'
-fileConfigName = 'API_Info.json'
+fileConfigName = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
 
 try:
