@@ -23,7 +23,7 @@ from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
 ##########? Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V1.2.01]'
+version = '[V2.0.1]'
 author = '[FacuFalcone - CaidevOficial]'
 fileConfigName = 'API_Info.json'
 ##########? End Basic Configuration ##########
