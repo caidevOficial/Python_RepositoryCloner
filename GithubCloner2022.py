@@ -45,10 +45,10 @@ try:
     # ?#########? End DataManager Configuration ##########
 
     # ?#########? Start DataFrame Configuration ##########
-    #* Reads the 'csv' File to get the dataframe
+    # *# Reads the 'csv' File to get the dataframe
     df = pd.read_csv(filename)
 
-    #* Sets the Main DF to the class to handle it
+    # *# Sets the Main DF to the class to handle it
     Handler.MainDataFrame = df
     Handler.ConfigsJsonValues = JsonDFConfigs
     Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])

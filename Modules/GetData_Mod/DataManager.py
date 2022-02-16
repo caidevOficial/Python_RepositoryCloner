@@ -274,9 +274,9 @@ class DataManager:
             str: [The normalized url]. \n
         """
         if not ".git" in url:
-            url = url.replace(' \n', '')
-            url = f'{url}.git'
-        return url.replace("\ \n", "")
+            url = url.replace('\n', '.git')
+            #url = f'{url}.git'
+        return url.replace("\n", "")
 
     def NormalizeCourse(self, course: str) -> str:
         """[summary] \n
@@ -364,10 +364,10 @@ class DataManager:
         self.Messenger.PrintMessage()
 
         try:
-            #? Create git Clone commands
+            # ?## Create git Clone commands
             self.MakeCloneCommands(DfH)
 
-            #? Execute the commands
+            # ?## Execute the commands
             self.ExecuteCommands(self.Messenger)
 
             self.Messenger.SetMessage('All Repositories have been cloned!')
