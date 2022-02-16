@@ -232,10 +232,10 @@ class DataFrameHandler:
             columnValue (str): [The column value to configurate]. \n
         """
 
-        #* Gets the unique values of the column 'columnValue' [Division]
+        # *# Gets the unique values of the column 'columnValue' [Division]
         self.ConfigUniqueValuesInColumn(columnValue)
-        #* For each unique value of the column 'columnValue' [Division]
-        #* Creates a list of dataframes with the students that have the specified value in the column 'columnValue' [Division]
+        # *# For each unique value of the column 'columnValue' [Division]
+        # *# Creates a list of dataframes with the students that have the specified value in the column 'columnValue' [Division]
         for unique in self.UniqueColumns:
             self.CreateListDFStudentsBy(
                 self.MainDataFrame, columnValue, unique)

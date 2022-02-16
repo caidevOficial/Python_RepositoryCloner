@@ -273,9 +273,9 @@ class DataManager:
         Returns:
             str: [The normalized url]. \n
         """
-        if not ".git" in url:
+        if ".git" not in url:
             url = url.replace('\n', '.git')
-            #url = f'{url}.git'
+            # url = f'{url}.git'
         return url.replace("\n", "")
 
     def NormalizeCourse(self, course: str) -> str:
@@ -319,7 +319,7 @@ class DataManager:
             Args:
                 surname (str): [The surname of the student]. \n
                 course (str): [The course of the student]. \n
-                git (str): [The url of the git's repository]. \n    
+                git (str): [The url of the git's repository]. \n
             """
         for frame in dfHandler.OrderListOfDFStudents:
             self.MakeCloneCommandsForDF(frame, dfHandler)
@@ -336,7 +336,10 @@ class DataManager:
             surnameStr = df[dfHandler.ConfigsJsonValues['Surname']][i]
             nameStr = df[dfHandler.ConfigsJsonValues['Name']][i]
             message = f"Cloning {surnameStr}, {nameStr}'s repository from {crudeCourse}"
-            command = f"git clone {self.NormalizeURL(df[dfHandler.ConfigsJsonValues['GitLink']][i])} {courseStr}//{self.FormatFullnameDate(surnameStr, nameStr)}"
+            normalizedURL = self.NormalizeURL(
+                df[dfHandler.ConfigsJsonValues['GitLink']][i])
+            normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
+            command = f"git clone {normalizedURL} {courseStr}//{normalizedFullname}"
             self.AddComand(command)
             self.CloningMessages = message
 
