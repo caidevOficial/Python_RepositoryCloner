@@ -200,9 +200,9 @@ In order to use this Cloner, you should configure the file [API_Info.json](./Mod
 [
     "Github": {
         "URL": "https://api.github.com/repos",
-        "USER": "CaidevOficial",
-        "REPO": "Python_Udemy_DataManipulation",
-        "BRANCH": "main"
+        "USER": "YOUR_GITHUB_USER",
+        "REPO": "YOUR_REPOSITORY_NAME",
+        "BRANCH": "THE_PRINCIPAL_BRANCH_NAME"
     },
     "DataFrame": {
         "Fields": {
