@@ -198,11 +198,11 @@ In order to use this Cloner, you should configure the file [apiInfo.json](apiInf
 
 ```json
 [
-    {
+    "Github": {
         "URL": "https://api.github.com/repos",
-        "USER": "Your_Github_User",
-        "REPO": "Your_Repository_To_Get_The_Date_Of_Last_Commit",
-        "BRANCH": "The_Branch_Of_The_Last_Commit_lowercase"
+        "USER": "CaidevOficial",
+        "REPO": "Python_Udemy_DataManipulation",
+        "BRANCH": "main"
     },
     "DataFrame": {
         "Fields": {
