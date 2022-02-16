@@ -35,6 +35,7 @@ class DataManager:
     __configAPIURL = ''
     __name = ''
     __version = ''
+    __author = ''
     __commands: list = []
     __Messenger: CM = CM()
     __studentsInfo: DataFrame = DataFrame()
@@ -45,16 +46,18 @@ class DataManager:
     def __init__(self):
         pass
 
-    def InitialConfig(self, name:str, version:str, APIURL:dict):
+    def InitialConfig(self, name:str, version:str, author:str, APIURL:dict):
         """[summary]\n
         Initialize the config of the class.\n
         Args:
             name (str): [The name of the program].\n
             version (str): [The version of the program].\n
+            author (str): [The author of the program].\n
             APIURL (dict): [The API URL of the program].\n
         """
         self.SetAppName(name)
         self.SetAppVersion(version)
+        self.AppAuthor = author
         self.SetAPIURL(APIURL)
         self.APIResponse = self.GetAPIURL()
 
@@ -176,6 +179,24 @@ class DataManager:
     #########? END GETTERS #########
     
     #########? PROPERTIES #########
+
+    @property
+    def AppAuthor(self)->str:
+        """[summary]\n
+        Get the author of the application.\n
+        Returns:
+            str: [The author of the application].\n
+        """
+        return self.__author
+
+    @AppAuthor.setter
+    def AppAuthor(self, author:str)->None:
+        """[summary]\n
+        Set the author of the application.\n
+        Args:
+            author (str): [The author of the application].\n
+        """
+        self.__author = author
 
     @property
     def Messenger(self)->CM:
@@ -339,7 +360,7 @@ class DataManager:
         """[summary]\n
         Open the file and get the data.\n
         """
-        appInfo = f'{self.GetAppName()} - {self.GetAppVersion()}'
+        appInfo = f'{self.GetAppName()} - {self.GetAppVersion()} by {self.AppAuthor}'
         self.Messenger.SetMessage(appInfo)
         self.Messenger.PrintMessage()
 
@@ -350,10 +371,11 @@ class DataManager:
             #? Execute the commands
             self.ExecuteCommands(self.Messenger)
             
-            # self.__Messenger.SetMessage('All Repositories have been cloned!')
-            # self.__Messenger.PrintMessage()
+            self.Messenger.SetMessage('All Repositories have been cloned!')
+            self.Messenger.PrintMessage()
+
         except Exception as e:
             self.Messenger.SetMessage(f'Exception: {e.args}')
-            self.__Messenger.PrintMessage()
+            self.Messenger.PrintMessage()
     
     #########? END METHODS #########

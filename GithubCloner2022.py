@@ -24,6 +24,7 @@ from DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
 version = '[V1.2.01]'
+author = '[FacuFalcone - CaidevOficial]'
 fileConfigName = 'API_Info.json'
 ##########? End Basic Configuration ##########
 
@@ -40,7 +41,7 @@ try:
     ##########? End Objects Instances ##########
 
     ##########? Start DataManager Configuration ##########
-    Manager.InitialConfig(name, version, JsonAPI)
+    Manager.InitialConfig(name, version, author, JsonAPI)
     ##########? End DataManager Configuration ##########
 
     ##########? Start DataFrame Configuration ##########
