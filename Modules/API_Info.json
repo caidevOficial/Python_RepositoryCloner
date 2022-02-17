@@ -2,7 +2,7 @@
     "Github": {
         "URL": "https://api.github.com/repos",
         "USER": "CaidevOficial",
-        "REPO": "Python_Udemy_DataManipulation",
+        "REPO": "Python_RepositoryCloner",
         "BRANCH": "main"
     },
     "DataFrame": {
