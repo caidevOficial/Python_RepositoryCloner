@@ -51,7 +51,7 @@
     </theader>
     <tr>
         <td>
-            <a href='https://lnkd.in/e-m4ThfQ'>
+            <a href='https://lnkd.in/e-m4ThfQ' target='_blank'>
                 <center>
                     <img alt='Youtube Logo' src='./Media/YT_Logo.png' width=350/>
                 </center>
