@@ -165,6 +165,21 @@ Meanwhile the program is cloning the repositories, the console will show message
     </tbody>
 </table>
 
+When finish, you look a final message (with the elapsed time of the execution) like this:
+
+<table align='center'>
+    <theader>
+        <th>Console Final Message</th>
+    </theader>
+    <tbody>
+        <tr>
+            <td>
+                <img alt='Console Messages Image' src='./Media/FinalMessage.png'>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 <br><br><br>
 
@@ -224,7 +239,7 @@ for example:
     {
         "URL": "https://api.github.com/repos",
         "USER": "CaidevOficial",
-        "REPO": "Python_Udemy_DataManipulation",
+        "REPO": "Python_RepositoryCloner",
         "BRANCH": "main"
     },
     "DataFrame": {
@@ -243,7 +258,7 @@ for example:
 Then the code will make the link like:
 
 ```
-https://api.github.com/repos/CaidevOficial/Python_Udemy_DataManipulation/commits/main
+https://api.github.com/repos/CaidevOficial/Python_RepositoryCloner/commits/main
 ```
 
 This way the program will take the 'Date' of the last commit of the branch 'main' and will use it to create the folder with the name of the repository. Obviously, the repository <strong>MUST BE PUBLIC</strong>, otherwise the program won't be able to access its API.
