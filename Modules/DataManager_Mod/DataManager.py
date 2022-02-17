@@ -16,8 +16,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-
 import requests
+
 from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DFH
 from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
 from pandas import DataFrame
@@ -32,152 +32,21 @@ class DataManager:
     """
     # ?########? START ATTRIBUTES #########
     __configAPIURL = ''
+    __APIResponse = None
+    __APIDate = None
     __name = ''
     __version = ''
     __author = ''
+    __studentsInfo: DataFrame = DataFrame()
     __commands: list = []
     __Messenger: CM = CM()
-    __studentsInfo: DataFrame = DataFrame()
-    __APIResponse = None
     __cloningMessages: list = []
     # ?#######? END ATTRIBUTES #########
 
     def __init__(self):
         pass
 
-    def InitialConfig(self, name: str, version: str, author: str, APIURL: dict):
-        """[summary] \n
-        Initialize the config of the class. \n
-        Args:
-            name (str): [The name of the program]. \n
-            version (str): [The version of the program]. \n
-            author (str): [The author of the program]. \n
-            APIURL (dict): [The API URL of the program]. \n
-        """
-        self.SetAppName(name)
-        self.SetAppVersion(version)
-        self.AppAuthor = author
-        self.SetAPIURL(APIURL)
-        self.APIResponse = self.GetAPIURL()
-
-    # ?########? SETTERS #########
-
-    def SetFilename(self, fileName: str) -> None:
-        """[summary] \n
-        Set the name of the file to read. \n
-        Args:
-            fileName (str): [The name of the file to read]. \n
-        """
-        self.fileName = fileName
-
-    def SetAppName(self, name: str) -> None:
-        """[summary] \n
-        Set the name of the file. \n
-        Args:
-            name (str): [The name of the file]. \n
-        """
-        self.__name = name
-
-    def SetAppVersion(self, version: str) -> None:
-        """[summary] \n
-        Set the version of the file. \n
-        Args:
-            version (str): [The version of the file]. \n
-        """
-        self.__version = version
-
-    def SetAPIURL(self, api: dict) -> None:
-        """[summary] \n
-        Set the URL of the API. \n
-        Args: \n
-            api (str): [The URL of the API] \n
-            "URL": "https://api.github.com/repos", \n
-            "USER": "CaidevOficial", \n
-            "REPO": "Python_Udemy_DataManipulation", \n
-            "BRANCH": "main"  \n
-            Example: "https://api.github.com/repos/CaidevOficial/Python_Udemy_DataManipulation/commits/main". \n
-        """
-        self.__configAPIURL = f'{api["URL"]}/{api["USER"]}/{api["REPO"]}/commits/{api["BRANCH"]}'
-
-    def AddComand(self, command: str) -> None:
-        """[summary] \n
-        Add a command to the list of the commands. \n
-        Args:
-            command (str): [The command to add]. \n
-        """
-        self.__commands.append(command)
-
-    def SetStudentsDF(self, students: DataFrame) -> None:
-        """[summary] \n
-        Sets the dataframe of students to work with. \n
-        Args:
-            students (DataFrame): The dataframe of students to work. \n
-        """
-        self.__studentsInfo = students
-
-    # ?#######? GETTERS #########
-
-    def GetCommands(self) -> list:
-        """[summary] \n
-        Get the commands to clone the repositories of the students. \n
-        Returns:
-            list: [The list of the commands to execute]. \n
-        """
-        return self.__commands
-
-    def GetAppName(self) -> str:
-        """[summary] \n
-        Get the name of the application. \n
-        Returns:
-            str: [The name of the application]. \n
-        """
-        return self.__name
-
-    def GetAppVersion(self) -> str:
-        """[summary] \n
-        Get the version of the application. \n
-        Returns:
-            str: [The version of the application]. \n
-        """
-        return self.__version
-
-    def GetFilename(self) -> str:
-        """[summary] \n
-        Get the name of the file. \n
-        Returns:
-            str: [The name of the file]. \n
-        """
-        return self.fileName
-
-    def GetAPIURL(self) -> str:
-        """[summary] \n
-        Get the URL of the API. \n
-        Returns:
-            str: [The URL of the API]. \n
-        """
-        return self.__configAPIURL
-
-    def GetDate(self) -> str:
-        """[summary] \n
-        Get the date from the API. \n
-        Returns:
-            str: [The date formatted without the dashes]. \n
-        """
-        date = self.APIResponse.json()["commit"]["author"]["date"]
-        date = date[:10]
-        return date.replace("-", "")
-
-    def GetStudentsDF(self) -> DataFrame:
-        """[summary] \n
-        Gets the Students DataFrame of the class to work with. \n
-        Returns:
-            DataFrame: The Actual DataFrame of the students. \n
-        """
-        return self.__studentsInfo
-
-    # ?########? END GETTERS #########
-
-    # ?########? PROPERTIES #########
+    # ?########? PROPERTIES - GET #########
 
     @property
     def AppAuthor(self) -> str:
@@ -187,15 +56,6 @@ class DataManager:
             str: [The author of the application]. \n
         """
         return self.__author
-
-    @AppAuthor.setter
-    def AppAuthor(self, author: str) -> None:
-        """[summary] \n
-        Set the author of the application. \n
-        Args:
-            author (str): [The author of the application]. \n
-        """
-        self.__author = author
 
     @property
     def Messenger(self) -> CM:
@@ -215,15 +75,6 @@ class DataManager:
         """
         return self.__commands
 
-    @Commands.setter
-    def Commands(self, commands: list):
-        """[summary] \n
-        Set the commands to clone the repositories of the students. \n
-        Args:
-            commands (list): [The list of the commands to execute]. \n
-        """
-        self.__commands = commands
-
     @property
     def APIResponse(self) -> str:
         """[summary] \n
@@ -233,14 +84,41 @@ class DataManager:
         """
         return self.__APIResponse
 
-    @APIResponse.setter
-    def APIResponse(self, APILink: str):
+    @property
+    def AppName(self) -> str:
         """[summary] \n
-        Set the API Response by sending a request trough the API link. \n
+        Set the name of the file. \n
         Args:
-            APILink (str): [The Link of the API]. \n
+            name (str): [The name of the file]. \n
         """
-        self.__APIResponse = requests.get(APILink)
+        return self.__name
+
+    @property
+    def AppVersion(self) -> str:
+        """[summary] \n
+        Get the version of the application. \n
+        Returns:
+            str: [The version of the application]. \n
+        """
+        return self.__version
+
+    @property
+    def APIURL(self) -> str:
+        """[summary] \n
+        Get the URL of the API. \n
+        Returns:
+            str: [The URL of the API]. \n
+        """
+        return self.__configAPIURL
+
+    @property
+    def StudensDF(self) -> DataFrame:
+        """[summary] \n
+        Get the dataframe with the students information. \n
+        Returns:
+            DataFrame: [The dataframe with the students information]. \n
+        """
+        return self.__studentsInfo
 
     @property
     def CloningMessages(self) -> list:
@@ -251,6 +129,87 @@ class DataManager:
         """
         return self.__cloningMessages
 
+    @property
+    def APIDate(self) -> str:
+        """[summary] \n
+        Get the date of the API. \n
+        Returns:
+            str: [The date of the API]. \n
+        """
+        return self.__APIDate
+
+    # ?########? END PROPERTIES - GET #########
+
+    # ?########? START PROPERTIES - SET #########
+
+    @AppAuthor.setter
+    def AppAuthor(self, author: str) -> None:
+        """[summary] \n
+        Set the author of the application. \n
+        Args:
+            author (str): [The author of the application]. \n
+        """
+        self.__author = author
+
+    @Commands.setter
+    def Commands(self, commands: list):
+        """[summary] \n
+        Set the commands to clone the repositories of the students. \n
+        Args:
+            commands (list): [The list of the commands to execute]. \n
+        """
+        self.__commands = commands
+
+    @APIResponse.setter
+    def APIResponse(self, APILink: str):
+        """[summary] \n
+        Set the API Response by sending a request trough the API link. \n
+        Args:
+            APILink (str): [The Link of the API]. \n
+        """
+        self.__APIResponse = requests.get(APILink)
+
+    @AppName.setter
+    def AppName(self, name: str) -> None:
+        """[summary] \n
+        Set the name of the file. \n
+        Args:
+            name (str): [The name of the file]. \n
+        """
+        self.__name = name
+
+    @AppVersion.setter
+    def AppVersion(self, version: str) -> None:
+        """[summary] \n
+        Set the version of the file. \n
+        Args:
+            version (str): [The version of the file]. \n
+        """
+        self.__version = version
+
+    @APIURL.setter
+    def APIURL(self, url: dict) -> None:
+        """[summary] \n
+        Set the URL of the API. \n
+        Args: \n
+            url (dict): [The json with all the fields of the API url.] \n
+            "URL": "https://api.github.com/repos", \n
+            "USER": "Your_Github_User", \n
+            "REPO": "Your_Repository", \n
+            "BRANCH": "Your_Principal_Branch"  \n
+            Example: "https://api.github.com/repos/Your_Github_User/Your_Repository/commits/Your_Principal_Branch". \n
+        """
+        self.__configAPIURL = f'{url["URL"]}/{url["USER"]}/{url["REPO"]}/commits/{url["BRANCH"]}'
+
+    @StudensDF.setter
+    def StudensDF(self, studentsInfo: DataFrame) -> None:
+        """[summary] \n
+        Set the dataframe of students to work with. \n
+        Args:
+            studentsInfo (DataFrame): The dataframe of students to work. \n
+        """
+        self.__studentsInfo = studentsInfo
+
     @CloningMessages.setter
     def CloningMessages(self, cloningMessage: str):
         """[summary] \n
@@ -260,9 +219,45 @@ class DataManager:
         """
         self.__cloningMessages.append(cloningMessage)
 
-    # ?#######? END PROPERTIES #########
+    @APIDate.setter
+    def APIDate(self, APIResponse: str):
+        """[summary] \n
+        Set the date of the API. \n
+        Args:
+            APIResponse (str): [The response of the API Setted]. \n
+        """
+        date = APIResponse.json()["commit"]["author"]["date"]
+        date = date[:10]
+        self.__APIDate = date.replace("-", "")
+
+    # ?#######? END PROPERTIES - SET #########
 
     # ?########? METHODS #########
+
+    def InitialConfig(self, name: str, version: str, author: str, APIURL: dict):
+        """[summary] \n
+        Initialize the config of the class, Also sets the API response \n
+        and the date of the API. \n
+        Args:
+            name (str): [The name of the program]. \n
+            version (str): [The version of the program]. \n
+            author (str): [The author of the program]. \n
+            APIURL (dict): [The API URL of the program]. \n
+        """
+        self.AppName = name
+        self.AppVersion = version
+        self.AppAuthor = author
+        self.APIURL = APIURL
+        self.APIResponse = self.APIURL
+        self.APIDate = self.APIResponse
+
+    def AddComand(self, command: str) -> None:
+        """[summary] \n
+        Add a command to the list of the commands. \n
+        Args:
+            command (str): [The command to add]. \n
+        """
+        self.__commands.append(command)
 
     def NormalizeURL(self, url: str) -> str:
         """[summary] \n
@@ -275,7 +270,6 @@ class DataManager:
         """
         if ".git" not in url:
             url = url.replace('\n', '.git')
-            # url = f'{url}.git'
         return url.replace("\n", "")
 
     def NormalizeCourse(self, course: str) -> str:
@@ -300,8 +294,7 @@ class DataManager:
         """
         surname = surname.replace(",", "_").replace(" ", "").replace(" \n", "")
         name = name.replace(",", "_").replace(" ", "").replace(" \n", "")
-
-        return f'{surname}_{name}_{self.GetDate()}'
+        return f'{surname}_{name}_{self.APIDate}'
 
     def FormatCourse(self, fieldList: str) -> str:
         """[summary] \n
@@ -335,7 +328,7 @@ class DataManager:
             courseStr = self.NormalizeCourse(self.FormatCourse(crudeCourse))
             surnameStr = df[dfHandler.ConfigsJsonValues['Surname']][i]
             nameStr = df[dfHandler.ConfigsJsonValues['Name']][i]
-            message = f"Cloning {surnameStr}, {nameStr}'s repository from {crudeCourse}"
+            message = f"Cloning the repository of: {surnameStr}, {nameStr} from {crudeCourse}"
             normalizedURL = self.NormalizeURL(
                 df[dfHandler.ConfigsJsonValues['GitLink']][i])
             normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
@@ -349,12 +342,11 @@ class DataManager:
         Args:
             commandList (list): [The list of the commands to execute]. \n
         """
-
         commandList = [x.strip() for x in self.Commands]
         messages = [x.strip() for x in self.CloningMessages]
 
         for command in commandList:
-            cloneMessenger.SetMessage(messages[commandList.index(command)])
+            cloneMessenger.Message = messages[commandList.index(command)]
             cloneMessenger.PrintMessage()
             os.system(command)
 
@@ -362,10 +354,9 @@ class DataManager:
         """[summary] \n
         Open the file and get the data. \n
         """
-        appInfo = f'{self.GetAppName()} - {self.GetAppVersion()} by {self.AppAuthor}'
-        self.Messenger.SetMessage(appInfo)
+        appInfo = f'{self.AppName} - {self.AppVersion} by {self.AppAuthor}'
+        self.Messenger.Message = appInfo
         self.Messenger.PrintMessage()
-
         try:
             # ?## Create git Clone commands
             self.MakeCloneCommands(DfH)
@@ -373,11 +364,11 @@ class DataManager:
             # ?## Execute the commands
             self.ExecuteCommands(self.Messenger)
 
-            self.Messenger.SetMessage('All Repositories have been cloned!')
+            self.Messenger.Message = 'All Repositories have been cloned!'
             self.Messenger.PrintMessage()
 
         except Exception as e:
-            self.Messenger.SetMessage(f'Exception: {e.args}')
+            self.Messenger.Message = f'Exception: {e.args}'
             self.Messenger.PrintMessage()
 
     # ?########? END METHODS #########
