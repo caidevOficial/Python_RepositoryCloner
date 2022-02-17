@@ -49,15 +49,17 @@
     <theader>
         <th><h2><center>Watch this little video Demo on 🎥</center></h2></th>
     </theader>
-    <tr>
+    <tbody>
+        <tr>
         <td>
-            <a href='https://lnkd.in/e-m4ThfQ' target='_blank'>
+            <a href="https://lnkd.in/e-m4ThfQ" target="_blank">
                 <center>
                     <img alt='Youtube Logo' src='./Media/YT_Logo.png' width=350/>
                 </center>
             </a>
         </td>
     </tr>
+    </tbody>
 </table>
 
 <br><br><br>
