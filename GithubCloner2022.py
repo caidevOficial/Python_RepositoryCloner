@@ -34,7 +34,6 @@ fileConfigName = 'Modules/API_Info.json'
 if __name__ == '__main__':
 
     start_time = datetime.datetime.now()
-    
     try:
         # ?#########? Start Initialization ##########
         JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
@@ -67,7 +66,7 @@ if __name__ == '__main__':
         Manager.CloneRepositories(Handler)
         # ?##########? End Initialize DataManager ###########
 
-        
+    
     except Exception as e:
         print(f'Exception: {e.args}')
     finally:

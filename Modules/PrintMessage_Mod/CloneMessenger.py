@@ -47,9 +47,9 @@ class CloneMessenger:
             message (str): The message to be printed in the console. \n
         """
         self.__message = message
-    
+
     # ?######? END PROPERTIES #######
-    
+
     # ?###########? START METHODS ############
 
     def InitializeMessenger(self, message: str) -> None:

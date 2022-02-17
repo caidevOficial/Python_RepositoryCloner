@@ -101,7 +101,7 @@ class DataManager:
             str: [The version of the application]. \n
         """
         return self.__version
-    
+
     @property
     def APIURL(self) -> str:
         """[summary] \n
@@ -110,7 +110,7 @@ class DataManager:
             str: [The URL of the API]. \n
         """
         return self.__configAPIURL
-    
+
     @property
     def StudensDF(self) -> DataFrame:
         """[summary] \n
@@ -119,7 +119,7 @@ class DataManager:
             DataFrame: [The dataframe with the students information]. \n
         """
         return self.__studentsInfo
-    
+
     @property
     def CloningMessages(self) -> list:
         """[summary]  \n
@@ -137,7 +137,6 @@ class DataManager:
             str: [The date of the API]. \n
         """
         return self.__APIDate
-    
 
     # ?########? END PROPERTIES - GET #########
 
@@ -201,7 +200,7 @@ class DataManager:
             Example: "https://api.github.com/repos/Your_Github_User/Your_Repository/commits/Your_Principal_Branch". \n
         """
         self.__configAPIURL = f'{url["URL"]}/{url["USER"]}/{url["REPO"]}/commits/{url["BRANCH"]}'
-    
+
     @StudensDF.setter
     def StudensDF(self, studentsInfo: DataFrame) -> None:
         """[summary] \n
@@ -295,7 +294,6 @@ class DataManager:
         """
         surname = surname.replace(",", "_").replace(" ", "").replace(" \n", "")
         name = name.replace(",", "_").replace(" ", "").replace(" \n", "")
-
         return f'{surname}_{name}_{self.APIDate}'
 
     def FormatCourse(self, fieldList: str) -> str:
@@ -359,7 +357,6 @@ class DataManager:
         appInfo = f'{self.AppName} - {self.AppVersion} by {self.AppAuthor}'
         self.Messenger.Message = appInfo
         self.Messenger.PrintMessage()
-
         try:
             # ?## Create git Clone commands
             self.MakeCloneCommands(DfH)
