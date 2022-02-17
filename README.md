@@ -8,7 +8,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan=2>
+        <td colspan=2 align='center'>
             <center>
                 <img alt="Pandas Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png?raw=true" height="150px" />
             </center>
