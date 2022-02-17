@@ -23,7 +23,7 @@ class Formatter:
     Formats the time saved in the attribute of the class, as a string. \n
     like: {:02.0f} minute(s) {:02.0f} seconds. \n
     Returns:
-        class: [Formatter]. \n 
+        class: [Formatter]. \n
     """
 
     # ?###########? START ATTRIBUTES ############
@@ -43,9 +43,9 @@ class Formatter:
     @property
     def FormattedTimeStr(self) -> str:
         """[summary] \n
-        Gets the formatted time string.
+        Gets the formatted time string.\n
         Returns:
-            str: [The formatted time string.]
+            str: [The formatted time string.]\n
         """
         return self.__formattedTimeStr
 
@@ -55,7 +55,7 @@ class Formatter:
         Sets the time into the class and format it as a string like: \n
         {:02.0f} minute(s) {:02.0f} seconds. \n
         Args:
-            value (datetime): [Time to be formatted and saved into the class.]
+            value (datetime): [Time to be formatted and saved into the class.]\n
         """
         self.__crudeTime = value
         self.__FormatDatetimeAsString()
@@ -63,9 +63,9 @@ class Formatter:
     @FormattedTimeStr.setter
     def FormattedTimeStr(self, formatTime: str) -> None:
         """[summary] \n
-        Sets the formatted time as a string.
+        Sets the formatted time as a string.\n
         Args:
-            start_time (datetime): [Formatted Time] \n
+            start_time (datetime): [Formatted Time]\n
         """
         self.__formattedTimeStr = formatTime
 
