@@ -28,22 +28,28 @@ class CloneMessenger:
     def __init__(self) -> None:
         pass
 
-    def SetMessage(self, message: str) -> None:
+    # ?######? START PROPERTIES #######
+
+    @property
+    def Message(self) -> str:
+        """[summary] \n
+        Get the message of the class. \n
+        Returns:
+            str: Message of the class. \n
+        """
+        return self.__message
+
+    @Message.setter
+    def Message(self, message: str) -> None:
         """[summary] \n
         Sets the message of the class. \n
         Args:
             message (str): The message to be printed in the console. \n
         """
         self.__message = message
-
-    def GetMessage(self) -> str:
-        """[summary] \n
-        Gets the message of the class. \n
-        Returns:
-            str: Message of the class to be printed in the console. \n
-        """
-        return self.__message
-
+    
+    # ?######? END PROPERTIES #######
+    
     # ?###########? START METHODS ############
 
     def InitializeMessenger(self, message: str) -> None:
@@ -63,7 +69,7 @@ class CloneMessenger:
         print(
             ' \n',
             f'{symbols} \n',
-            f'{self.GetMessage()} \n',
+            f'{self.Message} \n',
             f'{symbols} \n'
         )
 
@@ -73,6 +79,6 @@ class CloneMessenger:
         Returns:
             str: String of symbols of the same length of the message of the class. \n
         """
-        return ''.join(['#' for i in range(len(self.GetMessage()))])
+        return ''.join(['#' for i in range(len(self.Message))])
 
     # ?###########? END METHODS ############
