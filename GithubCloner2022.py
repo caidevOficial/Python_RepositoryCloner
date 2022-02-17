@@ -35,24 +35,24 @@ if __name__ == '__main__':
 
     start_time = datetime.datetime.now()
     try:
-        # ?#########? Start Initialization ##########
+    # ?#########? Start Initialization ##########
         JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
         JsonAPI = JsonFile['Github']
         JsonDFConfigs = JsonFile['DataFrame']['Fields']
-        # ?#########? End Initialization ############
+    # ?#########? End Initialization ############
 
-        # ?#########? Start Objects Instances ##########
+    # ?#########? Start Objects Instances ##########
         Handler = DfH()
         Manager = DM()
         Messenger = CM()
         Timer = FMT()
-        # ?#########? End Objects Instances ##########
+    # ?#########? End Objects Instances ##########
 
-        # ?#########? Start DataManager Configuration ##########
+    # ?#########? Start DataManager Configuration ##########
         Manager.InitialConfig(name, version, author, JsonAPI)
-        # ?#########? End DataManager Configuration ##########
+    # ?#########? End DataManager Configuration ##########
 
-        # ?#########? Start DataFrame Configuration ##########
+    # ?#########? Start DataFrame Configuration ##########
         # *# Reads the 'csv' File to get the dataframe
         df = pd.read_csv(filename)
 
@@ -60,21 +60,18 @@ if __name__ == '__main__':
         Handler.MainDataFrame = df
         Handler.ConfigsJsonValues = JsonDFConfigs
         Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
-        # ?#########? End DataFrame Configuration ##########
+    # ?#########? End DataFrame Configuration ##########
 
-        # ?#########? Start Initialize DataManager ##########
+    # ?#########? Start Initialize DataManager ##########
         Manager.CloneRepositories(Handler)
-        # ?##########? End Initialize DataManager ###########
-
-    
+    # ?##########? End Initialize DataManager ###########
     except Exception as e:
         print(f'Exception: {e.args}')
     finally:
-        # ?#########? Start Timer Config ##########
+    # ?#########? Start Timer Config ##########
         Timer.CrudeTime = start_time
-        # ?#########? End Timer Config ##########
-
-        # ?#########? Start Print Message ########## 
+    # ?#########? End Timer Config ##########
+    # ?#########? Start Print Message ########## 
         Messenger.Message = f"Elapsed Time: {Timer.FormattedTimeStr}"
         Messenger.PrintMessage()
 
@@ -83,6 +80,6 @@ if __name__ == '__main__':
 
         Messenger.Message = "Success! All task done. Press a key to close the app"
         Messenger.PrintMessage()
-        # ?#########? End Print Message ##########
+    # ?#########? End Print Message ##########
 
         end = input()
