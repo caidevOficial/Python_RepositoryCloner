@@ -1,14 +1,22 @@
 <table align='center'>
-  <tr>
-    <td>
-      <img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Instituciones/logo-utn_black_white.png?raw=true" height="150px" />
-    </td>
-    <td>
-      <img alt="Python Logo" src="https://github.com/devicons/devicon/raw/master/icons/python/python-original.svg?raw=true" height="160px" />
-    </td>
-  </tr>
-  </table>
-  </br>
+    <tr>
+        <td>
+            <img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Instituciones/logo-utn_black_white.png?raw=true" height="150px" />
+        </td>
+        <td>
+            <img alt="Python Logo" src="https://github.com/devicons/devicon/raw/master/icons/python/python-original.svg?raw=true" height="160px" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            <center>
+                <img alt="Pandas Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/1200px-Pandas_logo.svg.png?raw=true" height="150px" />
+            </center>
+        </td>
+    </tr>
+</table>
+</br>
+
 <div align="center">
     <h3>Pisces♓ | Developer👨‍💻 | Python<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="28"/> | GCP <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg?raw=true" alt="GCP" width="30" height="30"> | Java <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="30" height="30"/> | C# <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="25" height="25"/> | Dreamer 💖 | Teacher👨‍🏫| A bit nerd🤓</h3>
     <br>
@@ -32,12 +40,25 @@
 
 ---
 
-<br><br><br>
+<br>
 
-<div align='center'>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/51MlUgM4GS4">
-    </iframe>
-</div>
+
+
+
+<table align='center'>
+    <theader>
+        <th><h2><center>Watch this little video Demo on 🎥</center></h2></th>
+    </theader>
+    <tr>
+        <td>
+            <a href='https://lnkd.in/e-m4ThfQ'>
+                <center>
+                    <img alt='Youtube Logo' src='./Media/YT_Logo.png' width=350/>
+                </center>
+            </a>
+        </td>
+    </tr>
+</table>
 
 <br><br><br>
 
