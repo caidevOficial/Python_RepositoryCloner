@@ -52,7 +52,7 @@
     <tbody>
         <tr>
         <td>
-            <a href="https://lnkd.in/e-m4ThfQ" target="_blank">
+            <a href="https://youtu.be/ibRI8snPo40" target="_blank">
                 <center>
                     <img alt='Youtube Logo' src='./Media/YT_Logo.png' width=350/>
                 </center>

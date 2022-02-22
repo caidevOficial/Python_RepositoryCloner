@@ -162,18 +162,6 @@ class PlotManager:
 
     # ?### START METHODS ###?
 
-    def createColorsList(self) -> list:
-        """[summary]
-        Creates a list of colors for the pie chart. \n
-        Returns:
-            list: [List of colors for the pie chart]
-        """
-        # Sort colors by hue, saturation, value and name.
-        by_hsv = sorted((tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(color))), name)
-                        for name, color in mcolors.TABLEAU_COLORS.items())
-        names = [name for hsv, name in by_hsv]
-        return names
-
     def initialize(self, df: DataFrameHandler, title: str, path: str) -> None:
         """[summary]
         Initializes the PlotManager object. \n
@@ -187,13 +175,6 @@ class PlotManager:
         self.Slices = [len(dframe.index) for dframe in self.PlotDF.OrderListOfDFStudents]
         self.Title = title
         self.PathToSave = path
-
-    def CreateDirToSaveImages(self) -> None:
-        """[summary]
-        If not exist, creates a directory to save the images of the pie chart. \n
-        """
-        if not os.path.exists(self.PathToSave):
-            os.makedirs(self.PathToSave)
 
     def configureRCparams(self) ->None:
         """[summary]
@@ -216,9 +197,8 @@ class PlotManager:
 
         plt.pie(self.Slices, labels=self.Labels, startangle=45, shadow=True,
             autopct='%1.1f%%')
-        plt.legend(self.Labels, bbox_to_anchor=(1, 0.5), markerscale=1.2, loc='lower left')
+        plt.legend(self.Labels, bbox_to_anchor=(1, 0.5), markerscale=1.2, loc='upper left')
         plt.title(self.Title)
         plt.tight_layout()
-        # self.CreateDirToSaveImages()
         plt.savefig(f'{self.PathToSave}/{datetime.datetime.today().strftime("%Y%m%d__%H_%M_%S")}.png', dpi=300)
         plt.show()

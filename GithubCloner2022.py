@@ -20,11 +20,10 @@ import pandas as pd
 
 from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
 from Modules.DataManager_Mod.DataManager import DataManager as DM
-from Modules.Formatter_Mod.Formatter import Formatter as FMT
-from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
-from Modules.PlotManager_Mod.PlotManager import PlotManager as Plot
 from Modules.DirectoryManager_Mod.DirManager import DirectoryManager as DirM
-
+from Modules.Formatter_Mod.Formatter import Formatter as FMT
+from Modules.PlotManager_Mod.PlotManager import PlotManager as Plot
+from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
 
 # ?######### Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
