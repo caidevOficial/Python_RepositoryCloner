@@ -47,7 +47,7 @@
 
 <table align='center'>
     <theader>
-        <th><h2><center>Watch this little video Demo [for version without Pie Chart] on 🎥</center></h2></th>
+        <th><h2><center>Watch this little video Demo on 🎥</center></h2></th>
     </theader>
     <tbody>
         <tr>
