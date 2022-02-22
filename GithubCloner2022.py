@@ -22,12 +22,14 @@ from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DfH
 from Modules.DataManager_Mod.DataManager import DataManager as DM
 from Modules.Formatter_Mod.Formatter import Formatter as FMT
 from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
+from Modules.PlotManager_Mod.PlotManager import PlotManager as Plot
+from Modules.DirectoryManager_Mod.DirManager import DirectoryManager as DirM
 
 
 # ?######### Start Basic Configuration ##########
 filename = 'Github_Repositories.csv'
 name = 'Github Repository Cloner'
-version = '[V2.0.12]'
+version = '[V2.1.1]'
 author = '[FacuFalcone - CaidevOficial]'
 fileConfigName = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
@@ -40,6 +42,7 @@ if __name__ == '__main__':
         JsonFile = pd.read_json(f"./{fileConfigName}", orient='records')
         JsonAPI = JsonFile['Github']
         JsonDFConfigs = JsonFile['DataFrame']['Fields']
+        JsonDirConfigs = JsonFile['Files']
     # ?#########? End Initialization ############
 
     # ?#########? Start Objects Instances ##########
@@ -47,10 +50,20 @@ if __name__ == '__main__':
         Manager = DM()
         Messenger = CM()
         Timer = FMT()
+        Plotter = Plot()
+        DirManager = DirM()
     # ?#########? End Objects Instances ##########
 
+    # ?#########? Start Directory Creation ##########
+        DirManager.PathToCreate = JsonDirConfigs['Dir_Plots_img']
+        DirManager.createDirIfNoExist()
+
+        DirManager.PathToCreate = JsonDirConfigs['Dir_Cloned_Repos']
+        DirManager.createDirIfNoExist()
+    # ?#########? End Directory Creation ##########
+
     # ?#########? Start DataManager Configuration ##########
-        Manager.InitialConfig(name, version, author, JsonAPI)
+        Manager.InitialConfig(name, version, author, JsonAPI, JsonDirConfigs['Dir_Cloned_Repos'])
     # ?#########? End DataManager Configuration ##########
 
     # ?#########? Start DataFrame Configuration ##########
@@ -66,6 +79,10 @@ if __name__ == '__main__':
     # ?#########? Start Initialize DataManager ##########
         Manager.CloneRepositories(Handler)
     # ?##########? End Initialize DataManager ###########
+
+    # ?#########? Start PlotManager Configuration ##########
+        Plotter.initialize(Handler, 'Repositories to Clone', JsonDirConfigs['Dir_Plots_img'])
+
     except Exception as e:
         print(f'Exception: {e.args}')
     finally:
@@ -79,6 +96,10 @@ if __name__ == '__main__':
         Messenger.Message = f"Thanks for using {name} {version} by {author}! ♥"
         Messenger.PrintMessage()
 
+        Messenger.Message = "Creating Pie Chart..."
+        Messenger.PrintMessage()
+        Plotter.createPieChart()
+        
         Messenger.Message = "Success! All task done. Press a key to close the app"
         Messenger.PrintMessage()
     # ?#########? End Print Message ##########

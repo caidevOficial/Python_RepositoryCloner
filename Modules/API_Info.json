@@ -7,6 +7,7 @@
     },
     "DataFrame": {
         "Fields": {
+            "Date": "Marca temporal",
             "Name": "Nombre/s",
             "Surname": "Apellido/s",
             "Course": "División",
@@ -14,5 +15,9 @@
             "Email": "E-Mail",
             "GitLink": "Link al repositorio"
         }
+    },
+    "Files": {
+        "Dir_Plots_img": "./Plot_Images",
+        "Dir_Cloned_Repos": "./Repositories"
     }
 }
