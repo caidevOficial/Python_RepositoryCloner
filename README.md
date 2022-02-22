@@ -47,17 +47,19 @@
 
 <table align='center'>
     <theader>
-        <th><h2><center>Watch this little video Demo on 🎥</center></h2></th>
+        <th><h2><center>Watch this little video Demo [for version without Pie Chart] on 🎥</center></h2></th>
     </theader>
-    <tr>
+    <tbody>
+        <tr>
         <td>
-            <a href='https://lnkd.in/e-m4ThfQ' target='_blank'>
+            <a href="https://youtu.be/ibRI8snPo40" target="_blank">
                 <center>
                     <img alt='Youtube Logo' src='./Media/YT_Logo.png' width=350/>
                 </center>
             </a>
         </td>
     </tr>
+    </tbody>
 </table>
 
 <br><br><br>
@@ -183,7 +185,7 @@ Meanwhile the program is cloning the repositories, the console will show message
 
 <table align='center'>
     <theader>
-        <th>Console Messages</th>
+        <th><center>Console Messages</center></th>
     </theader>
     <tbody>
         <tr>
@@ -198,12 +200,29 @@ When finish, you look a final message (with the elapsed time of the execution) l
 
 <table align='center'>
     <theader>
-        <th>Console Final Message</th>
+        <th><center>Console Final Message</center></th>
     </theader>
     <tbody>
         <tr>
             <td>
                 <img alt='Console Messages Image' src='./Media/FinalMessage.png'>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+At the end of the execution, the program will download the files of every student and save them in the directory of the course that they belong to. Additionally, the program will generate a JSON with the data of the students and courses and it will generate a Pie Chart with the percentage of students that have downloaded the repositories...
+
+Like the image below:
+
+<table align='center'>
+    <theader>
+        <th><center>Example Pie Chart</center></th>
+    </theader>
+    <tbody>
+        <tr>
+            <td>
+                <img alt='Example Pie Chart' src='./Media/pieChart.png'>
             </td>
         </tr>
     </tbody>
@@ -250,6 +269,7 @@ In order to use this Cloner, you should configure the file [API_Info.json](./Mod
     },
     "DataFrame": {
         "Fields": {
+            "Date": "First_Datetime_Field_To_Delete",
             "Name": "Name_For_Column_Of_Names",
             "Surname": "Name_For_Column_Of_Surnames",
             "Course": "Name_For_Column_Of_Courses",
@@ -257,6 +277,10 @@ In order to use this Cloner, you should configure the file [API_Info.json](./Mod
             "Email": "Name_For_Column_Of_Emails",
             "GitLink": "Name_For_Column_Of_Links_To_Repositories"
         }
+    },
+    "Files": {
+        "Dir_Plots_img": "./DIR_FOR_PLOTS_IMAGES",
+        "Dir_Cloned_Repos": "./DIR_FOR_CLONED_REPOSITORIES",
     }
 ]
 ```
@@ -273,6 +297,7 @@ for example:
     },
     "DataFrame": {
         "Fields": {
+            "Date": "Marca temporal",
             "Name": "Nombre/s",
             "Surname": "Apellido/s",
             "Course": "División",
@@ -280,6 +305,10 @@ for example:
             "Email": "E-Mail",
             "GitLink": "Link al repositorio"
         }
+    },
+    "Files": {
+        "Dir_Plots_img": "./Plot_Images",
+        "Dir_Cloned_Repos": "./Repositories"
     }
 ]
 ```
@@ -294,14 +323,19 @@ This way the program will take the 'Date' of the last commit of the branch 'main
 
 Regarding the 'DataFrame' Key, al the keys inside are configured to use them with a 'csv' file with at least theses columns. [Could have more columns, but it's not necessary for us.]
 
+Finally, respect the 'Files' Key, where you can configure the directory where the plots will be saved and the directory where the cloned repositories will be saved.
+
 For our example, the columns of the csv file are:
 
 <table>
     <thead>
-        <th>Nombre/s</th><th>Apellido/s</th><th>División</th><th>DNI / Legajo</th><th>E-Mail</th><th>Link al repositorio</th>
+        <th>Marca Temporal</th><th>Nombre/s</th><th>Apellido/s</th><th>División</th><th>DNI / Legajo</th><th>E-Mail</th><th>Link al repositorio</th>
     </thead>
     <tbody>
         <tr>
+            <td align='center'>
+                <h3>2022/02/13 10:26:52 p. m. GMT-3</h3>
+            </td>
             <td align='center'>
                 <h3>Poseidon</h3>
             </td>

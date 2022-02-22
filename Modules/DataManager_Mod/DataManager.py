@@ -31,6 +31,7 @@ class DataManager:
         [class]: [DataManager]. \n
     """
     # ?########? START ATTRIBUTES #########
+    __mainDir: str = ''
     __configAPIURL = ''
     __APIResponse = None
     __APIDate = None
@@ -138,6 +139,15 @@ class DataManager:
         """
         return self.__APIDate
 
+    @property
+    def MainDir(self) -> str:
+        """[summary] \n
+        Get the main directory to save the downloaded repositories. \n
+        Returns:
+            str: [The main directory to save the downloaded repositories]. \n
+        """
+        return self.__mainDir
+
     # ?########? END PROPERTIES - GET #########
 
     # ?########? START PROPERTIES - SET #########
@@ -230,11 +240,20 @@ class DataManager:
         date = date[:10]
         self.__APIDate = date.replace("-", "")
 
+    @MainDir.setter
+    def MainDir(self, mainDir: str) -> None:
+        """[summary] \n
+        Set the main directory to save the downloaded repositories. \n
+        Args:
+            mainDir (str): [The main directory to save the downloaded repositories]. \n
+        """
+        self.__mainDir = mainDir.strip()
+
     # ?#######? END PROPERTIES - SET #########
 
     # ?########? METHODS #########
 
-    def InitialConfig(self, name: str, version: str, author: str, APIURL: dict):
+    def InitialConfig(self, name: str, version: str, author: str, APIURL: dict, mainDir: str):
         """[summary] \n
         Initialize the config of the class, Also sets the API response \n
         and the date of the API. \n
@@ -243,6 +262,7 @@ class DataManager:
             version (str): [The version of the program]. \n
             author (str): [The author of the program]. \n
             APIURL (dict): [The API URL of the program]. \n
+            mainDir (str): [The main directory to clone repositories]. \n
         """
         self.AppName = name
         self.AppVersion = version
@@ -250,6 +270,7 @@ class DataManager:
         self.APIURL = APIURL
         self.APIResponse = self.APIURL
         self.APIDate = self.APIResponse
+        self.MainDir = mainDir
 
     def AddComand(self, command: str) -> None:
         """[summary] \n
@@ -315,7 +336,7 @@ class DataManager:
                 git (str): [The url of the git's repository]. \n
             """
         for frame in dfHandler.OrderListOfDFStudents:
-            self.MakeCloneCommandsForDF(frame, dfHandler)
+            self.MakeCloneCommandsForDF(frame.reset_index(drop=True), dfHandler)
 
     def MakeCloneCommandsForDF(self, df: DataFrame, dfHandler: DFH) -> None:
         """[summary] \n
@@ -323,6 +344,9 @@ class DataManager:
         Args:
             df (DataFrame): [The DataFrame with the students information]. \n
         """
+        # *## Deletes the first column [Date]
+        df = df.drop(columns=dfHandler.ConfigsJsonValues['Date'], inplace=False, axis=1)
+        df = df.applymap(lambda x: str(x).strip())
         for i in df.index:
             crudeCourse = df[dfHandler.ConfigsJsonValues['Course']][i]
             courseStr = self.NormalizeCourse(self.FormatCourse(crudeCourse))
@@ -332,7 +356,7 @@ class DataManager:
             normalizedURL = self.NormalizeURL(
                 df[dfHandler.ConfigsJsonValues['GitLink']][i])
             normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
-            command = f"git clone {normalizedURL} {courseStr}//{normalizedFullname}"
+            command = f"git clone {normalizedURL} {self.MainDir}//{courseStr}//{normalizedFullname}"
             self.AddComand(command)
             self.CloningMessages = message
 
