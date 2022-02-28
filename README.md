@@ -14,6 +14,21 @@
             </center>
         </td>
     </tr>
+    <tr>
+        <td colspan=2 align='center'>
+            <center>
+                <img alt="Matplotlib Logo" src="https://camo.githubusercontent.com/9f609b65162567643c396ef42e9ccc2f755906847714389cbc1dcd707b234ebb/68747470733a2f2f6d6174706c6f746c69622e6f72672f5f7374617469632f6c6f676f325f636f6d707265737365642e7376673f7261773d74727565" height="150px" />
+            </center>
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2 align='center'>
+            <center>
+                <img alt="NumPy Logo" src="https://caidevoficial.github.io/FF_Resume/media/icons/numpy/numpy_logo.svg?raw=true" height="150px" /> 
+        </a>
+            </center>
+        </td>
+    </tr>
 </table>
 </br>
 

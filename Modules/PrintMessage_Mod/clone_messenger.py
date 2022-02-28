@@ -64,6 +64,10 @@ class CloneMessenger:
         """[summary] \n
         Creates a string of symbols of the same length of the message and \n
         prints them in the console. \n
+        like: \n
+        ############### \n
+        ##Your Message ## \n
+        ############### \n
         """
         symbols = self.GenerateSymbols()
         print(
