@@ -16,11 +16,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime
-import os
 
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
-from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler
+from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler
 
 
 class PlotManager:

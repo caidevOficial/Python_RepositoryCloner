@@ -18,8 +18,8 @@
 import os
 import requests
 
-from Modules.DataFrameHandler_Mod.DFHandler import DataFrameHandler as DFH
-from Modules.PrintMessage_Mod.CloneMessenger import CloneMessenger as CM
+from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DFH
+from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 from pandas import DataFrame
 
 
@@ -336,7 +336,7 @@ class DataManager:
                 git (str): [The url of the git's repository]. \n
             """
         for frame in dfHandler.OrderListOfDFStudents:
-            self.MakeCloneCommandsForDF(frame.reset_index(drop=True), dfHandler)
+            self.MakeCloneCommandsForDF(frame, dfHandler)
 
     def MakeCloneCommandsForDF(self, df: DataFrame, dfHandler: DFH) -> None:
         """[summary] \n
