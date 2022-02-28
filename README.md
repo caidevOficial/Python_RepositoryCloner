@@ -83,7 +83,7 @@
 The program it allows you to clone repositories from github in bulk and store them in specific directories from a csv file.
 Aditionally it saves the data of every student & course into a json with the name of the course.
 
-All this is possible by the use of [Pandas library](https://pandas.pydata.org/docs/index.html) and dataframes to manipulate the data, sorting and filtering the courses, students and repositories to get a list of dataframes, one for each course with all the students data sorted by course, surname and name.
+All this is possible by the use of [Pandas library](https://pandas.pydata.org/docs/index.html) and dataframes to manipulate the data, sorting and filtering the courses, students and repositories to get a list of dataframes, one for each course with all the students data sorted by course, surname and name and then, it will create a Pie Chart, using [Matplotlib Pyplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html), with the percentages of students categorized according to their course whose repositories have been cloned.
 
 At the end of the execution, the program will download the files of every student and save them in the directory of the course that they belong to.
 
