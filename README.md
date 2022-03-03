@@ -1,7 +1,7 @@
 <table align='center'>
     <tr>
         <td>
-            <img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Instituciones/logo-utn_black_white.png?raw=true" height="150px" />
+            <img alt="Universidad Tecnológica Nacional" src="https://github.com/caidevOficial/Logos/raw/master/Personales/Personal_Logo_Gif.gif?raw=true" height="150px" />
         </td>
         <td>
             <img alt="Python Logo" src="https://github.com/devicons/devicon/raw/master/icons/python/python-original.svg?raw=true" height="160px" />
