@@ -21,6 +21,8 @@ import requests
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DFH
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 from pandas import DataFrame
+from Modules.Commands_Mod.Command_Manager import Command as CMD
+
 
 
 class DataManager:
@@ -39,9 +41,10 @@ class DataManager:
     __version = ''
     __author = ''
     __studentsInfo: DataFrame = DataFrame()
-    __commands: list = []
     __Messenger: CM = CM()
-    __cloningMessages: list = []
+    __Command_Manager: CMD = CMD()
+    __commands: list[CMD] = []
+    __cloningMessages: list[str] = []
     # ?#######? END ATTRIBUTES #########
 
     def __init__(self):
@@ -75,6 +78,16 @@ class DataManager:
             list: [The list of the commands to execute]. \n
         """
         return self.__commands
+
+    @property
+    def Command_Manager(self):
+        """[summary] \n
+        Get the command instance that have the necessary info\n
+        to clone the repositories. \n
+        Returns:
+            list: [The instance that have the commands to clone]. \n
+        """
+        return self.__Command_Manager
 
     @property
     def APIResponse(self) -> str:
@@ -162,7 +175,7 @@ class DataManager:
         self.__author = author
 
     @Commands.setter
-    def Commands(self, commands: list):
+    def Commands(self, commands: list[CMD]):
         """[summary] \n
         Set the commands to clone the repositories of the students. \n
         Args:
@@ -271,8 +284,9 @@ class DataManager:
         self.APIResponse = self.APIURL
         self.APIDate = self.APIResponse
         self.MainDir = mainDir
+        self.Command_Manager.Main_Directory = mainDir
 
-    def AddComand(self, command: str) -> None:
+    def AddComand(self, command: CMD) -> None:
         """[summary] \n
         Add a command to the list of the commands. \n
         Args:
@@ -356,8 +370,12 @@ class DataManager:
             normalizedURL = self.NormalizeURL(
                 df[dfHandler.ConfigsJsonValues['GitLink']][i])
             normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
-            command = f"git clone {normalizedURL} {self.MainDir}//{courseStr}//{normalizedFullname}"
-            self.AddComand(command)
+            
+            self.Command_Manager.Main_Directory = f'{self.MainDir}'
+            self.Command_Manager.Sub_Directory = {courseStr}//{normalizedFullname}
+            self.Command_Manager.Full_Command = f'git clone {normalizedURL} {self.Command_Manager.Main_Directory}//{self.Command_Manager.Sub_Directory}'
+            # command = f"git clone {normalizedURL} {self.MainDir}//{courseStr}//{normalizedFullname}"
+            self.AddComand(self.Command_Manager)
             self.CloningMessages = message
 
     def ExecuteCommands(self, cloneMessenger: CM) -> None:
@@ -366,9 +384,12 @@ class DataManager:
         Args:
             commandList (list): [The list of the commands to execute]. \n
         """
-        commandList = [x.strip() for x in self.Commands]
+        commandList = [x.Full_Command.strip() for x in self.Commands]
         messages = [x.strip() for x in self.CloningMessages]
 
+        # !# Check if works correctly with the new class
+        # !# Try to add the class Directory manager and create the directories before
+        # !# Clonning the repositories
         for command in commandList:
             cloneMessenger.Message = messages[commandList.index(command)]
             cloneMessenger.PrintMessage()
