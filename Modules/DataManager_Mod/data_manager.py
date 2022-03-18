@@ -371,11 +371,12 @@ class DataManager:
                 df[dfHandler.ConfigsJsonValues['GitLink']][i])
             normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
             
-            self.Command_Manager.Main_Directory = f'{self.MainDir}'
-            self.Command_Manager.Sub_Directory = {courseStr}//{normalizedFullname}
-            self.Command_Manager.Full_Command = f'git clone {normalizedURL} {self.Command_Manager.Main_Directory}//{self.Command_Manager.Sub_Directory}'
+            single_command = CMD()
+            single_command.Main_Directory = f'{self.MainDir}'
+            single_command.Sub_Directory = f'{courseStr}/{normalizedFullname}'
+            single_command.Full_Command = f'git clone {normalizedURL} {single_command.Main_Directory}/{single_command.Sub_Directory}'
             # command = f"git clone {normalizedURL} {self.MainDir}//{courseStr}//{normalizedFullname}"
-            self.AddComand(self.Command_Manager)
+            self.AddComand(single_command)
             self.CloningMessages = message
 
     def ExecuteCommands(self, cloneMessenger: CM) -> None:

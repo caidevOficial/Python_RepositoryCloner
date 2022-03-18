@@ -48,18 +48,9 @@ class Command:
         self.__main_directory = dir
     
     @Sub_Directory.setter
-    def Main_Directory(self, sub_dir: str) -> None:
+    def Sub_Directory(self, sub_dir: str) -> None:
         self.__sub_directory = sub_dir
     
     @Full_Command.setter
-    def Main_Directory(self, cmd: str) -> None:
+    def Full_Command(self, cmd: str) -> None:
         self.__full_command = cmd
-    
-    
-    
-    
-    
-    
-
-        
-    
