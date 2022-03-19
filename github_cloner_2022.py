@@ -28,7 +28,7 @@ from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 # ?######### Start Basic Configuration ##########
 FILENAME = 'Github_Repositories.csv'
 NAME = 'Github Repository Cloner'
-VERSION = '[V2.1.15]'
+VERSION = '[V2.1.16.1]'
 AUTHOR = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
@@ -69,7 +69,7 @@ if __name__ == '__main__':
         df = pd.read_csv(FILENAME)
 
         # *# Sets the Main DF to the class to handle it
-        Handler.MainDataFrame = df
+        Handler.MainDataFrame = df.applymap(lambda x: str(x).strip())
         Handler.ConfigsJsonValues = JsonDFConfigs
         Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
     # ?#########? End DataFrame Configuration ##########

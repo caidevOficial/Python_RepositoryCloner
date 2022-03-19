@@ -221,7 +221,7 @@ class DataFrameHandler:
             frame (DataFrame): [The dataframe to create the json file]. \n
             name (str): [The name of the json file]. \n
         """
-        frame.to_json(f'{name}.json', orient='table',
+        frame.to_json(f'{name}.json', orient='records',
                    indent=4, force_ascii=True)
 
     def createJsonOfEveryDF(self):
@@ -233,12 +233,6 @@ class DataFrameHandler:
                             self.ConfigsJsonValues['Course']]
             filename: str = f'{name}.json'
             self.createJSONofDF(students_df, filename)
-        # for i in range(len(self.OrderListOfDFStudents)):
-        #     frame: DataFrame = self.OrderListOfDFStudents[i]
-        #     name = frame.at[frame.index.values[0],
-        #                     self.ConfigsJsonValues['Course']]
-        #     filename: str = f'{name}.json'
-        #     self.createJSONofDF(frame, filename)
 
     # ?####? End METHODS #####
 

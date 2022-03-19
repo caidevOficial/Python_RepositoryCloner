@@ -363,7 +363,7 @@ class DataManager:
         """
         # *## Deletes the first column [Date]
         df = df.drop(columns=dfHandler.ConfigsJsonValues['Date'], inplace=False, axis=1)
-        df = df.applymap(lambda x: str(x).strip())
+        # df = df.applymap(lambda x: str(x).strip())
         for i in df.index:
             crudeCourse = df[dfHandler.ConfigsJsonValues['Course']][i]
             courseStr = self.NormalizeCourse(self.FormatCourse(crudeCourse))
