@@ -20,6 +20,7 @@ import requests
 
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DFH
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
+from Modules.Commands_Mod.Command_Manager import Command as CMD
 from pandas import DataFrame
 
 
@@ -39,9 +40,9 @@ class DataManager:
     __version = ''
     __author = ''
     __studentsInfo: DataFrame = DataFrame()
-    __commands: list = []
     __Messenger: CM = CM()
-    __cloningMessages: list = []
+    __commands: list[CMD] = []
+    __cloningMessages: list[str] = []
     # ?#######? END ATTRIBUTES #########
 
     def __init__(self):
@@ -162,7 +163,7 @@ class DataManager:
         self.__author = author
 
     @Commands.setter
-    def Commands(self, commands: list):
+    def Commands(self, commands: list[CMD]):
         """[summary] \n
         Set the commands to clone the repositories of the students. \n
         Args:
@@ -272,7 +273,7 @@ class DataManager:
         self.APIDate = self.APIResponse
         self.MainDir = mainDir
 
-    def AddComand(self, command: str) -> None:
+    def AddComand(self, command: CMD) -> None:
         """[summary] \n
         Add a command to the list of the commands. \n
         Args:
@@ -338,6 +339,22 @@ class DataManager:
         for frame in dfHandler.OrderListOfDFStudents:
             self.MakeCloneCommandsForDF(frame, dfHandler)
 
+    def CreateSingleCommand(self, courseStr: str, normalizedFullname: str, normalizedURL: str) -> None:
+        """[summary]\n
+        Create a single command to clone the repository of the student,\n
+        then add it to the list of the commands.
+
+        Args:
+            courseStr (str): [The course of the student].\n
+            normalizedFullname (str): [The normalized fullname of the student].\n
+            normalizedURL (str): [The normalized url of the git's repository of the student].\n
+        """
+        single_command = CMD()
+        single_command.Main_Directory = f'{self.MainDir}'
+        single_command.Sub_Directory = f'{courseStr}/{normalizedFullname}'
+        single_command.Full_Command = f'git clone {normalizedURL} {single_command.Main_Directory}/{single_command.Sub_Directory}'
+        self.AddComand(single_command)
+
     def MakeCloneCommandsForDF(self, df: DataFrame, dfHandler: DFH) -> None:
         """[summary] \n
         Make the commands to clone the repositories of the students. \n
@@ -356,8 +373,7 @@ class DataManager:
             normalizedURL = self.NormalizeURL(
                 df[dfHandler.ConfigsJsonValues['GitLink']][i])
             normalizedFullname = self.FormatFullnameDate(surnameStr, nameStr)
-            command = f"git clone {normalizedURL} {self.MainDir}//{courseStr}//{normalizedFullname}"
-            self.AddComand(command)
+            self.CreateSingleCommand(courseStr, normalizedFullname, normalizedURL)
             self.CloningMessages = message
 
     def ExecuteCommands(self, cloneMessenger: CM) -> None:
@@ -366,7 +382,7 @@ class DataManager:
         Args:
             commandList (list): [The list of the commands to execute]. \n
         """
-        commandList = [x.strip() for x in self.Commands]
+        commandList = [x.Full_Command.strip() for x in self.Commands]
         messages = [x.strip() for x in self.CloningMessages]
 
         for command in commandList:
