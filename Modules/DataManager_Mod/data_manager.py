@@ -20,7 +20,7 @@ import requests
 
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DFH
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
-from Modules.Commands_Mod.Command_Manager import Command as CMD
+from Modules.Commands_Mod.command_manager import Command as CMD
 from pandas import DataFrame
 
 
