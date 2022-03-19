@@ -105,90 +105,44 @@ like this:
 And the JSON generates with the data of the students and courses will be like this:
 
 ```json
-{
-    "schema":{
-        "fields":[
-            {
-                "name":"index",
-                "type":"integer"
-            },
-            {
-                "name":"Marca temporal",
-                "type":"string"
-            },
-            {
-                "name":"Nombre\/s",
-                "type":"string"
-            },
-            {
-                "name":"Apellido\/s",
-                "type":"string"
-            },
-            {
-                "name":"Divisi\u00f3n",
-                "type":"string"
-            },
-            {
-                "name":"DNI \/ Legajo",
-                "type":"integer"
-            },
-            {
-                "name":"E-Mail",
-                "type":"string"
-            },
-            {
-                "name":"Link al repositorio",
-                "type":"string"
-            }
-        ],
-        "primaryKey":[
-            "index"
-        ],
-        "pandas_version":"1.4.0"
+[
+    {
+        "Temporal Sign":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
+        "Name":"Heracles",
+        "Surname":"Grecian DemiGod",
+        "Division":"1A - Professor 1 - Helper 3",
+        "Student ID":"999999",
+        "E-Mail":"Heracles@nordicreign.com",
+        "Link to repository":"https:\/\/github.com\/caidevOficial\/CaidevOficial"
     },
-    "data":[
-        {
-            "index":5,
-            "Marca temporal":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
-            "Nombre\/s":"Artemisa",
-            "Apellido\/s":"Grecian God",
-            "Divisi\u00f3n":"1G - Professor 1 - Helper 1",
-            "DNI \/ Legajo":444444,
-            "E-Mail":"zeus@ray.com",
-            "Link al repositorio":"https:\/\/github.com\/caidevOficial\/Python_IEEE_Team14293.git"
-        },
-        {
-            "index":3,
-            "Marca temporal":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
-            "Nombre\/s":"Zeus",
-            "Apellido\/s":"Grecian God",
-            "Divisi\u00f3n":"1G - Professor 1 - Helper 1",
-            "DNI \/ Legajo":444444,
-            "E-Mail":"zeus@ray.com",
-            "Link al repositorio":"https:\/\/github.com\/caidevOficial\/Python_IEEE_Team14293.git"
-        },
-        {
-            "index":4,
-            "Marca temporal":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
-            "Nombre\/s":"Mercury",
-            "Apellido\/s":"Romane God",
-            "Divisi\u00f3n":"1G - Professor 1 - Helper 1",
-            "DNI \/ Legajo":222222,
-            "E-Mail":"neptune@notplanet.com",
-            "Link al repositorio":"https:\/\/github.com\/caidevOficial\/SPD2022_TPS.git"
-        },
-        {
-            "index":0,
-            "Marca temporal":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
-            "Nombre\/s":"Neptune",
-            "Apellido\/s":"Romane God",
-            "Divisi\u00f3n":"1G - Professor 1 - Helper 1",
-            "DNI \/ Legajo":222222,
-            "E-Mail":"neptune@notplanet.com",
-            "Link al repositorio":"https:\/\/github.com\/caidevOficial\/SPD2022_TPS.git"
-        }
-    ]
-}
+    {
+        "Temporal Sign":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
+        "Name":"Hades",
+        "Surname":"Grecian God",
+        "Division":"1A - Professor 1 - Helper 3",
+        "Student ID":"111111",
+        "E-Mail":"Hades@underworld.com",
+        "Link to repository":"https:\/\/github.com\/caidevOficial\/CaidevOficial.git"
+    },
+    {
+        "Temporal Sign":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
+        "Name":"Odin",
+        "Surname":"Nordic God",
+        "Division":"1A - Professor 1 - Helper 3",
+        "Student ID":"777777",
+        "E-Mail":"odin@fatherofall.com",
+        "Link to repository":"https:\/\/github.com\/caidevOficial\/Python_RepositoryCloner.git"
+    },
+    {
+        "Temporal Sign":"2022\/02\/13 10:26:52 p.\u00a0m. GMT-3",
+        "Name":"Valhalla",
+        "Surname":"Nordic Reign",
+        "Division":"1A - Professor 1 - Helper 3",
+        "Student ID":"999999",
+        "E-Mail":"valhalla@nordicreign.com",
+        "Link to repository":"https:\/\/github.com\/caidevOficial\/CaidevOficial"
+    }
+]
 ```
 <br><br><br>
 
