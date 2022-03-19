@@ -28,7 +28,7 @@ from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 # ?######### Start Basic Configuration ##########
 FILENAME = 'Github_Repositories.csv'
 NAME = 'Github Repository Cloner'
-VERSION = '[V2.1.11]'
+VERSION = '[V2.1.14]'
 AUTHOR = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
