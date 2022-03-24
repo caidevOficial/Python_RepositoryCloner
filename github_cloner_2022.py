@@ -21,14 +21,14 @@ import pandas as pd
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DfH
 from Modules.DataManager_Mod.data_manager import DataManager as DM
 from Modules.DirectoryManager_Mod.dir_manager import DirectoryManager as DirM
-from Modules.Formatter_Mod.formatter import Formatter as FMT
+from Modules.Formatter_Mod.Formatter import Formatter as FMT
 from Modules.PlotManager_Mod.plot_manager import PlotManager as Plot
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 
 # ?######### Start Basic Configuration ##########
 FILENAME = 'Github_Repositories.csv'
 NAME = 'Github Repository Cloner'
-VERSION = '[V2.2.0]'
+VERSION = '[V2.2.0.1]'
 AUTHOR = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
