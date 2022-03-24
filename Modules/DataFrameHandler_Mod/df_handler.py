@@ -18,6 +18,8 @@
 from numpy import ndarray
 from pandas import DataFrame
 
+from Modules.Formatter_Mod.formatter import Formatter as FMT
+
 
 class DataFrameHandler:
     """[summary] \n
@@ -154,6 +156,27 @@ class DataFrameHandler:
     # ?####? End PROPERTIES - SETTERS #####
 
     # ?####? METHODS #####
+
+    def FormatDF(self, df: DataFrame, JsonDFConfigs: dict) -> DataFrame:
+        """[summary] \n
+        Format the dataframe by:\n
+            - Removing the extra spaces.\n
+            - Capitalizing the first letter of each word of Name & Surname.\n
+            - Removing the Duplicateds rows.\n
+        Args:
+            df (DataFrame): [The dataframe to format].\n
+            JsonDFConfigs (dict): [The dictionary with the values of columns to capitalize].\n
+        Returns:
+            [DataFrame]: [The formatted dataframe].\n
+        """
+        formatter = FMT()
+        df = df.applymap(lambda x: str(x).strip())
+        # ?# Apply a Capitalise in every word from both columns
+        df[JsonDFConfigs['Name']] = df[JsonDFConfigs['Name']].apply(lambda x: formatter.Capitalize_Words(x))
+        df[JsonDFConfigs['Surname']] = df[JsonDFConfigs['Surname']].apply(lambda x: formatter.Capitalize_Words(x))
+        # ?# Removes the duplicated fields to avoid errors
+        df = df.drop_duplicates(keep='first', subset=[JsonDFConfigs['Name'], JsonDFConfigs['Surname'], JsonDFConfigs['GitLink']])
+        return df
 
     def OrderIndexedDFBy(self, frame: DataFrame, first_field: str, second_field: str, third_field: str) -> DataFrame:
         """[summary] \n

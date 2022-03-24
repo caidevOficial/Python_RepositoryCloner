@@ -82,4 +82,14 @@ class Formatter:
         m, s = divmod(seconds, 60)
         self.FormattedTimeStr = "{:02.0f} minute(s) {:02.0f} seconds".format(m, s)
 
+    def Capitalize_Words(self, string: str) -> str:
+        """[summary] \n
+        Capitalize each word of the string. \n
+        Args:
+            string (str): [The string to be capitalized.]\n
+        Returns:
+            str: [Every word of the string capitalized.]\n
+        """
+        return ' '.join(word.capitalize() for word in string.split(' '))
+
     # ?###########? END METHODS ############
