@@ -18,7 +18,7 @@
 from numpy import ndarray
 from pandas import DataFrame
 
-from Modules.Formatter_Mod.formatter import Formatter as FMT
+from Modules.Formatter_Mod.Formatter import Formatter as FMT
 
 
 class DataFrameHandler:

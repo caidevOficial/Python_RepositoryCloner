@@ -21,7 +21,7 @@ import pandas as pd
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DfH
 from Modules.DataManager_Mod.data_manager import DataManager as DM
 from Modules.DirectoryManager_Mod.dir_manager import DirectoryManager as DirM
-from Modules.Formatter_Mod.formatter import Formatter as FMT
+from Modules.Formatter_Mod.Formatter import Formatter as FMT
 from Modules.PlotManager_Mod.plot_manager import PlotManager as Plot
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 
