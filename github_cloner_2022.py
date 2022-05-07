@@ -26,11 +26,11 @@ from Modules.PlotManager_Mod.plot_manager import PlotManager as Plot
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 
 # ?######### Start Basic Configuration ##########
-FILENAME = 'Github_Repositories.csv'
-NAME = 'Github Repository Cloner'
-VERSION = '[V2.2.0.1]'
-AUTHOR = '[FacuFalcone - CaidevOficial]'
-FILE_CONFIG_NAME = 'Modules/API_Info.json'
+FILENAME: str = 'Github_Repositories_1F.csv'
+NAME: str = 'Github Repository Cloner'
+VERSION: str = '[V2.2.0.1]'
+AUTHOR: str = '[FacuFalcone - CaidevOficial]'
+FILE_CONFIG_NAME: str = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
 
 if __name__ == '__main__':
