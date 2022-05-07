@@ -254,7 +254,7 @@ class DataFrameHandler:
         for students_df in self.OrderListOfDFStudents:
             name = students_df.at[students_df.index.values[0],
                             self.ConfigsJsonValues['Course']]
-            filename: str = f'{name}.json'
+            filename: str = f'{name}'
             self.createJSONofDF(students_df, filename)
 
     # ?####? End METHODS #####
