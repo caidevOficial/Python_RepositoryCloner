@@ -175,7 +175,7 @@ class DataFrameHandler:
         df[JsonDFConfigs['Name']] = df[JsonDFConfigs['Name']].apply(lambda x: formatter.Capitalize_Words(x))
         df[JsonDFConfigs['Surname']] = df[JsonDFConfigs['Surname']].apply(lambda x: formatter.Capitalize_Words(x))
         # ?# Removes the duplicated fields to avoid errors
-        df = df.drop_duplicates(keep='first', subset=[JsonDFConfigs['Name'], JsonDFConfigs['Surname'], JsonDFConfigs['GitLink']])
+        df = df.drop_duplicates(keep='first', subset=[JsonDFConfigs['GitLink']])
         return df
 
     def OrderIndexedDFBy(self, frame: DataFrame, first_field: str, second_field: str, third_field: str) -> DataFrame:
@@ -237,31 +237,33 @@ class DataFrameHandler:
         self.UniqueColumns = self.MainDataFrame[column].unique()
         self.UniqueColumns.sort()
 
-    def createJSONofDF(self, frame: DataFrame, name: str):
+    def createJSONofDF(self, frame: DataFrame, dir_statistics: str, name: str):
         """[summary] \n
         Create a json file for the specified dataframe. \n
         Args:
             frame (DataFrame): [The dataframe to create the json file]. \n
             name (str): [The name of the json file]. \n
         """
-        frame.to_json(f'{name}.json', orient='records',
+        frame.to_json(f'{dir_statistics}/{name}.json', orient='records',
                    indent=4, force_ascii=True)
 
-    def createJsonOfEveryDF(self):
+    def createJsonOfEveryDF(self, dir_statistics: str):
         """[summary] \n
         Create a json file for every dataframe. \n
         """
+        # Create dir for jsons
+
         for students_df in self.OrderListOfDFStudents:
             name = students_df.at[students_df.index.values[0],
                             self.ConfigsJsonValues['Course']]
             filename: str = f'{name}'
-            self.createJSONofDF(students_df, filename)
+            self.createJSONofDF(students_df, dir_statistics, filename)
 
     # ?####? End METHODS #####
 
     # *####* MAIN METHOD #####
 
-    def ConfigurateDataFrame(self, column_value: str) -> None:
+    def ConfigurateDataFrame(self, column_value: str, dir_statistics: str) -> None:
         """[summary] \n
         Configurate the dataframe with the specified column value. \n
         Args:
@@ -277,6 +279,6 @@ class DataFrameHandler:
             self.CreateListDFStudentsBy(
                 self.MainDataFrame, column_value, unique
             )
-        self.createJsonOfEveryDF()
+        self.createJsonOfEveryDF(dir_statistics)
 
     # *####* END MAIN METHOD #####

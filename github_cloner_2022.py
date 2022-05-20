@@ -26,9 +26,9 @@ from Modules.PlotManager_Mod.plot_manager import PlotManager as Plot
 from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 
 # ?######### Start Basic Configuration ##########
-FILENAME: str = 'Github_Repositories_1F.csv'
+FILENAME: str = 'Github_Repositories.csv'
 NAME: str = 'Github Repository Cloner'
-VERSION: str = '[V2.2.0.1]'
+VERSION: str = '[V2.2.1.1]'
 AUTHOR: str = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME: str = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
@@ -58,6 +58,9 @@ if __name__ == '__main__':
 
         DirManager.PathToCreate = JsonDirConfigs['Dir_Cloned_Repos']
         DirManager.createDirIfNoExist()
+
+        DirManager.PathToCreate = JsonDirConfigs['Dir_Statistics']
+        DirManager.createDirIfNoExist()
     # ?#########? End Directory Creation ##########
 
     # ?#########? Start DataManager Configuration ##########
@@ -71,7 +74,10 @@ if __name__ == '__main__':
         # *# Sets the Main DF to the class to handle it
         Handler.ConfigsJsonValues = JsonDFConfigs
         Handler.MainDataFrame = Handler.FormatDF(df, JsonDFConfigs)
-        Handler.ConfigurateDataFrame(Handler.ConfigsJsonValues['Course'])
+        Handler.ConfigurateDataFrame(
+            Handler.ConfigsJsonValues['Course'], 
+            JsonDirConfigs['Dir_Statistics']
+        )
     # ?#########? End DataFrame Configuration ##########
 
     # ?#########? Start Initialize DataManager ##########
