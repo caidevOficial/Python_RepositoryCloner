@@ -28,7 +28,7 @@ from Modules.PrintMessage_Mod.clone_messenger import CloneMessenger as CM
 # ?######### Start Basic Configuration ##########
 FILENAME: str = 'Github_Repositories.csv'
 NAME: str = 'Github Repository Cloner'
-VERSION: str = '[V2.2.1.1]'
+VERSION: str = '[V2.2.1.11]'
 AUTHOR: str = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME: str = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     # ?##########? End Initialize DataManager ###########
 
     # ?#########? Start PlotManager Configuration ##########
-        Plotter.initialize(Handler, 'Repositories to Clone', JsonDirConfigs['Dir_Plots_img'])
+        Plotter.initialize(Handler, 'Cloned Repositories', JsonDirConfigs['Dir_Plots_img'])
 
     # ?#########? Start Timer Config ##########
         Timer.CrudeTime = start_time
