@@ -242,6 +242,7 @@ class DataFrameHandler:
         Create a json file for the specified dataframe. \n
         Args:
             frame (DataFrame): [The dataframe to create the json file]. \n
+            dir_statistics (str): [The directory to save the json file]. \n
             name (str): [The name of the json file]. \n
         """
         frame.to_json(f'{dir_statistics}/{name}.json', orient='records',
@@ -250,9 +251,9 @@ class DataFrameHandler:
     def createJsonOfEveryDF(self, dir_statistics: str):
         """[summary] \n
         Create a json file for every dataframe. \n
+        Args:
+            dir_statistics (str): [The directory to save the json files]. \n
         """
-        # Create dir for jsons
-
         for students_df in self.OrderListOfDFStudents:
             name = students_df.at[students_df.index.values[0],
                             self.ConfigsJsonValues['Course']]
@@ -268,6 +269,7 @@ class DataFrameHandler:
         Configurate the dataframe with the specified column value. \n
         Args:
             column_value (str): [The column value to configurate]. \n
+            dir_statistics (str): [The directory to save the json files]. \n
         """
 
         # *# Gets the unique values of the column 'column_value' [Division]
