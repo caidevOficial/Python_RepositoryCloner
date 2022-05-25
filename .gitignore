@@ -134,3 +134,9 @@ dmypy.json
 Plot_Images/
 Repositories/
 Statistics/
+
+# Vscode
+.vscode/
+
+# Other Stuff
+TODO.txt
