@@ -16,6 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime
+import logging
 import pandas as pd
 
 from Modules.DataFrameHandler_Mod.df_handler import DataFrameHandler as DfH
@@ -33,10 +34,18 @@ AUTHOR: str = '[FacuFalcone - CaidevOficial]'
 FILE_CONFIG_NAME: str = 'Modules/API_Info.json'
 # ?######### End Basic Configuration ##########
 
+# INFO -> 10
+# DEBUG -> 20
+# WARNING -> 30
+# ERROR -> 40
+# CRITICAL -> 50
+
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
     try:
         start_time = datetime.datetime.now()
     # ?#########? Start Initialization ##########
+        logging.debug('Reading Json with configurations...')
         JsonFile = pd.read_json(f"./{FILE_CONFIG_NAME}", orient='records')
         JsonAPI = JsonFile['Github']
         JsonDFConfigs = JsonFile['DataFrame']['Fields']
@@ -53,6 +62,7 @@ if __name__ == '__main__':
     # ?#########? End Objects Instances ##########
 
     # ?#########? Start Directory Creation ##########
+        logging.debug('Creating directories to save files...')
         DirManager.PathToCreate = JsonDirConfigs['Dir_Plots_img']
         DirManager.createDirIfNoExist()
 
@@ -64,14 +74,17 @@ if __name__ == '__main__':
     # ?#########? End Directory Creation ##########
 
     # ?#########? Start DataManager Configuration ##########
+        logging.debug('Initializing Data Manager...')
         Manager.InitialConfig(NAME, VERSION, AUTHOR, JsonAPI, JsonDirConfigs['Dir_Cloned_Repos'])
     # ?#########? End DataManager Configuration ##########
 
     # ?#########? Start DataFrame Configuration ##########
         # *# Reads the 'csv' File to get the dataframe
+        logging.debug('Reading CSV with students info...')
         df = pd.read_csv(FILENAME)
         
         # *# Sets the Main DF to the class to handle it
+        logging.debug('Configuring main dataframe with student information...')
         Handler.ConfigsJsonValues = JsonDFConfigs
         Handler.MainDataFrame = Handler.FormatDF(df, JsonDFConfigs)
         Handler.ConfigurateDataFrame(
@@ -81,10 +94,12 @@ if __name__ == '__main__':
     # ?#########? End DataFrame Configuration ##########
 
     # ?#########? Start Initialize DataManager ##########
+        logging.debug('Cloning Repositories...')
         Manager.CloneRepositories(Handler)
     # ?##########? End Initialize DataManager ###########
 
     # ?#########? Start PlotManager Configuration ##########
+        logging.debug('Creating Plot...')
         Plotter.initialize(Handler, 'Cloned Repositories', JsonDirConfigs['Dir_Plots_img'])
 
     # ?#########? Start Timer Config ##########
